@@ -21,11 +21,15 @@ public class GenericAccess
         em.persist(object);
     }
 
-    public <T> void delete(Class<T> type,Integer id)
+    public <T> void delete(Class<T> type, Integer id)
     {
-
         T obj = em.find(type, id);
         em.remove(obj);
+    }
+
+    public <T> void Update(Object object)
+    {
+        em.merge(object);
     }
 
     public <T> List<T> list(T type)

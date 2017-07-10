@@ -36,10 +36,6 @@ public class UserController
         userService.delete(id);
     }
 
-    @Transactional
-    public void add(String email, String login)
-    {
-        userService.add(login, email);
-    }
+
 
 }
