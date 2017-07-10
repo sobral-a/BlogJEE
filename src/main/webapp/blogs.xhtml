@@ -13,8 +13,10 @@
     <h:outputText value="#{sessionScope['userId']}" style="font-weight: bold"/>
     <h:outputText value="#{sessionScope['userRole']}" style="font-weight: bold"/>
     <h1>Blogs</h1>
+    <p:commandButton value="Add blog" actionListener="#{blogController.setBlog(blog)}" icon="ui-icon-plusthick" />
+
     <h:form>
-        <p:dataScroller value="#{blogsController.getBlogList()}" var="blog" chunkSize="10">
+        <p:dataScroller id="blogsList" value="#{blogsController.getBlogList()}" var="blog" chunkSize="10">
             <f:facet name="header">
                 All the blogs
             </f:facet>
@@ -27,12 +29,20 @@
                         <h:outputText value="Date:" />
                         <h:outputText value="#{blog.getCreationDate().toString()}" style="font-weight: bold"/>
 
+                        <h:outputText value="Theme:" />
+                        <h:outputText value="#{blog.getTheme()}" style="font-weight: bold"/>
+
                         <h:outputText value="Author:" />
                         <h:outputText value="#{blog.getUser().getFirstName().concat(' ').concat(blog.getUser().getName())}" style="font-weight: bold"/>
 
                         <h:outputText value="Posts:" />
                         <h:outputText value="#{blog.getPosts().size()}" style="font-weight: bold"/>
                         <p:commandButton value="Visit the blog" id="withIcon" actionListener="#{blogController.setBlog(blog)}" icon="ui-icon-document" />
+                        <c:if test="#{(sessionScope['userId'] eq blog.getUser().getId()) or (sessionScope['userRole'] eq 'admin')}" >
+                            <p:commandButton value="Delete blog" icon="ui-icon-close" actionListener="#{blogController.setBlog(blog)}" update="blogsList"/>
+                        </c:if>
+
+
                     </h:panelGrid>
                 </p:outputPanel>
             </h:panelGrid>
