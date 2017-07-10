@@ -10,13 +10,14 @@
 <h:head>
 </h:head>
 <f:view>
+    <h:outputText value="#{sessionScope['userId']}" style="font-weight: bold"/>
+    <h:outputText value="#{sessionScope['userRole']}" style="font-weight: bold"/>
     <h1>Blogs</h1>
     <h:form>
         <p:dataScroller value="#{blogsController.getBlogList()}" var="blog" chunkSize="10">
             <f:facet name="header">
                 All the blogs
             </f:facet>
-
             <h:panelGrid columns="2" style="width:100%" columnClasses="detail">
                 <p:outputPanel>
                     <h:panelGrid columns="2" cellpadding="5">
