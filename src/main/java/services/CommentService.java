@@ -7,7 +7,9 @@ import models.Post;
 import models.User;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -15,8 +17,8 @@ import java.util.List;
  * Created by alexa on 16/06/2017.
  */
 
-@ApplicationScoped
-public class CommentService
+@SessionScoped
+public class CommentService implements Serializable
 {
     @Inject
     private GenericAccess commentAccess;

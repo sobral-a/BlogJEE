@@ -6,8 +6,10 @@ import models.*;
 import models.Post;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.ws.rs.POST;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -15,8 +17,8 @@ import java.util.List;
  * Created by alexa on 16/06/2017.
  */
 
-@ApplicationScoped
-public class PostService
+@SessionScoped
+public class PostService implements Serializable
 {
     @Inject
     private GenericAccess postAccess;
