@@ -1,4 +1,4 @@
-package media;
+package models;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,28 +9,25 @@ import javax.persistence.*;
 /**
  * Created by alexa on 10/06/2017.
  */
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class File
+public class Sharing
 {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
-    @Column
-    private String path;
-
-    @Column
-    private String format;
 
     @ManyToOne
     @JoinColumn(name = "media_id")
     private Media media;
 
+    @ManyToOne
+    @JoinColumn(name = "user_sharing_id")
+    private User userSharing;
 
-
+    @ManyToOne
+    @JoinColumn(name = "user_share_to_id")
+    private User userShared;
 }

@@ -1,4 +1,4 @@
-package media;
+package models;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -33,13 +33,13 @@ public class Media
     @JoinColumn(name="profile_id")
     private Profile profile;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy="media")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy= "models")
     private List<Value> values = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "media")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "models")
     private List<File> files = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "media")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "models")
     private List<Sharing> sharings = new ArrayList<>();
 
 }

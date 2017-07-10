@@ -1,4 +1,4 @@
-package media;
+package models;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,21 +13,19 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Sharing
+public class Value
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column
+    private String value;
+
     @ManyToOne
-    @JoinColumn(name = "media_id")
     private Media media;
 
     @ManyToOne
-    @JoinColumn(name = "user_sharing_id")
-    private User userSharing;
-
-    @ManyToOne
-    @JoinColumn(name = "user_share_to_id")
-    private User userShared;
+    @JoinColumn(name = "parameter_id")
+    private Parameter parameter;
 }

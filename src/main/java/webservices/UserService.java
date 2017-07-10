@@ -3,15 +3,12 @@ package webservices;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
-import media.User;
+import models.User;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 import javax.ws.rs.*;
-import javax.ws.rs.core.Context;
 import java.util.ArrayList;
-import java.util.Enumeration;
 
 /**
  * Created by alexa on 17/06/2017.

@@ -1,13 +1,7 @@
 package main;
 
-import dao.GenericAccess;
-import media.User;
-import services.UserService;
-
-import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.List;
 
 /**
  * Created by Kevin on 10/06/2017.

@@ -1,10 +1,11 @@
-package media;
+package models;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by alexa on 10/06/2017.
@@ -13,19 +14,15 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Value
+public class Profile
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column
-    private String value;
+    private String name;
 
-    @ManyToOne
-    private Media media;
-
-    @ManyToOne
-    @JoinColumn(name = "parameter_id")
-    private Parameter parameter;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy="profile")
+    private List<Media> medias;
 }

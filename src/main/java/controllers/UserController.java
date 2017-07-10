@@ -1,15 +1,12 @@
 package controllers;
 
-import interceptor.Transaction;
-import media.User;
+import models.User;
 import services.UserService;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.transaction.Transactional;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.List;
 
 /**

@@ -1,11 +1,10 @@
 package services;
 
 import dao.GenericAccess;
-import media.User;
+import models.User;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import javax.transaction.Transactional;
 import java.util.List;
 
 /**

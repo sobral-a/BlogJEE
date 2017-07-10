@@ -1,13 +1,8 @@
 package dao;
 
-import interceptor.Transaction;
-import media.User;
-
 import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
 import java.util.List;
 
 /**
