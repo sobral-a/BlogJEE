@@ -1,16 +1,18 @@
 package dao;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by alexa on 16/06/2017.
  */
 
-@ApplicationScoped
-public class GenericAccess
+@SessionScoped
+public class GenericAccess implements Serializable
 {
 
     @PersistenceContext(unitName = "context")

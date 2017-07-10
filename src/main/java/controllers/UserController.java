@@ -1,29 +1,43 @@
 package controllers;
 
+import lombok.Getter;
+import lombok.Setter;
 import models.User;
 import services.UserService;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.transaction.Transactional;
+import java.io.IOException;
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by alexa on 17/06/2017.
  */
 
-@ApplicationScoped
+@SessionScoped
 @Named("userController")
-public class UserController
+public class UserController implements Serializable
 {
+    @Getter @Setter
+    private String email;
+    @Getter @Setter
+    private String name;
+    @Getter @Setter
+    private String firstName;
+    @Getter @Setter
+    private String password;
+
     @Inject
     private UserService userService;
 
-    public String getName()
-    {
-        return "UserController";
-    }
 
     public List<User> getUserList()
     {
@@ -37,11 +51,29 @@ public class UserController
         return user;
     }
 
+    @Transactional
+    public void addUser(String role) {
+        if (name.isEmpty() || firstName.isEmpty() || email.isEmpty() || password.isEmpty()) {
+            addMessage("Fill all the fields!");
+            return;
+        }
+        try {
+            userService.add(name, firstName, email, password, role);
+            ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+            context.redirect("/webApp/connection.xhtml");
+        } catch(Exception e) {
+            addMessage("Something goes wrong...");
+        }
+    }
+
+    public void addMessage(String summary) {
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_FATAL, summary,  null);
+        FacesContext.getCurrentInstance().addMessage(null, message);
+    }
+
+    @Transactional
     public void delete(Integer id)
     {
         userService.delete(id);
     }
-
-
-
 }

@@ -8,31 +8,4 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:head>
 </h:head>
-<h:body>
-    <h:form id="loginForm">
-        <p:growl id="msg" showDetail="true" life="3000" />
-        <p:panel header="Register" style="width: 360px;">
-            <h:panelGrid id="registerPanel" columns="2">
-                <h:outputText value="Email" />
-                <p:inputText id="email" binding="#{email}" required="true" label="Email"></p:inputText>
-                <p:spacer></p:spacer>
-                <p:message for="email" ></p:message>
-                <h:outputText value="Name" />
-                <p:inputText id="name" binding="#{name}" required="true" label="Name"></p:inputText>
-                <p:spacer></p:spacer>
-                <p:message for="name" ></p:message>
-                <h:outputText value="Firstname" />
-                <p:inputText id="firstname" binding="#{firstname}" required="true" label="Firstname"></p:inputText>
-                <p:spacer></p:spacer>
-                <p:message for="firstname" ></p:message>
-                <h:outputText value="Password" />
-                <p:password id="password" value="#{loginBean.password}"  feedback="false"></p:password>
-                <p:spacer></p:spacer>
-                <p:message for="password"></p:message>
-                <p:spacer></p:spacer>
-                <p:commandButton action="${userController.add(email.value, name.value, firstname.value, password.value)}" value="Register" />
-            </h:panelGrid>
-        </p:panel>
-    </h:form>
-</h:body>
 </html>
