@@ -66,6 +66,23 @@ public class UserController implements Serializable
         }
     }
 
+    public void connect() {
+        if (email.isEmpty() || password.isEmpty()) {
+            addMessage("Fill all the fields!");
+            return;
+        }
+        try {
+            if (!userService.checkConnection(email, password)) {
+                addMessage("Wrong email or password");
+                return;
+            }
+            ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+            context.redirect("/webApp/blogs.xhtml");
+        } catch(Exception e) {
+            addMessage("Something goes wrong...");
+        }
+    }
+
     public void addMessage(String summary) {
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_FATAL, summary,  null);
         FacesContext.getCurrentInstance().addMessage(null, message);

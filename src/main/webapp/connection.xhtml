@@ -11,19 +11,19 @@
 </h:head>
 <h:body>
     <h:form id="loginForm">
-        <p:growl id="msg" showDetail="true" life="3000" />
+        <p:growl id="growl" showDetail="true" life="3000" />
         <p:panel header="Login" style="width: 360px;">
             <h:panelGrid id="loginPanel" columns="2">
                 <h:outputText value="Email" />
-                <p:inputText id="email" binding="#{email}" required="true" label="Email"></p:inputText>
+                <p:inputText id="email" value="#{userController.email}" label="Email"></p:inputText>
                 <p:spacer></p:spacer>
                 <p:message for="email" ></p:message>
                 <h:outputText value="Password" />
-                <p:password id="password" binding="#{password}"  feedback="false"></p:password>
+                <p:password id="password" value="#{userController.password}"  label="Password"></p:password>
                 <p:spacer></p:spacer>
-                <p:message for="password"></p:message>
+                <p:message for="password" ></p:message>
                 <p:spacer></p:spacer>
-                <p:commandButton action="${userController.addUser(name.value, firstname.value, email.value, password.value, 'user')}" value="Login" />
+                <p:commandButton action="#{userController.connect}" value="Login" update="growl"/>
             </h:panelGrid>
         </p:panel>
     </h:form>

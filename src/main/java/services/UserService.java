@@ -1,6 +1,7 @@
 package services;
 
 import dao.GenericAccess;
+import dao.UserAccess;
 import models.Comment;
 import models.User;
 
@@ -18,7 +19,7 @@ import java.util.List;
 public class UserService implements Serializable
 {
     @Inject
-    private GenericAccess userAccess;
+    private UserAccess userAccess;
 
     public void add(String name, String firstName, String email, String password, String role)
     {
@@ -36,7 +37,7 @@ public class UserService implements Serializable
     {
         User user = userAccess.getById(User.class, id);
         user.setIsDeleted(true);
-        userAccess.Update(id);
+        userAccess.update(id);
     }
 
     public void update(Integer id, String name, String firstName, String email, String password, String role)
@@ -47,7 +48,7 @@ public class UserService implements Serializable
         user.setFirstName(firstName);
         user.setPassword(password);
         user.setRole(role);
-        userAccess.Update(user);
+        userAccess.update(user);
     }
 
     public User getById(Integer id)
@@ -58,5 +59,9 @@ public class UserService implements Serializable
     public List<User> list()
     {
         return userAccess.list(new User());
+    }
+
+    public Boolean checkConnection(String email, String password) {
+        return userAccess.checkConnection(email, password);
     }
 }

@@ -39,7 +39,7 @@ public class PostService implements Serializable
     {
         Post post  = postAccess.getById(Post.class, id);
         post.setIsDeleted(true);
-        postAccess.Update(post);
+        postAccess.update(post);
     }
 
     public void update(Integer id, Blog blog, User user, String title, String content)
@@ -49,7 +49,7 @@ public class PostService implements Serializable
         post.setBlog(blog);
         post.setTitle(title);
         post.setContent(content);
-        postAccess.Update(post);
+        postAccess.update(post);
     }
 
 

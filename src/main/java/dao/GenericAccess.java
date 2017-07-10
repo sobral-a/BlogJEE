@@ -2,6 +2,7 @@ package dao;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.SessionScoped;
+import javax.enterprise.inject.Any;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.io.Serializable;
@@ -12,6 +13,7 @@ import java.util.List;
  */
 
 @SessionScoped
+@Any
 public class GenericAccess implements Serializable
 {
 
@@ -29,7 +31,7 @@ public class GenericAccess implements Serializable
         em.remove(obj);
     }
 
-    public <T> void Update(Object object)
+    public <T> void update(Object object)
     {
         em.merge(object);
     }

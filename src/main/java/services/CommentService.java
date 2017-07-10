@@ -38,7 +38,7 @@ public class CommentService implements Serializable
     {
         Comment comment  = commentAccess.getById(Comment.class, id);
         comment.setIsDeleted(true);
-        commentAccess.Update(comment);
+        commentAccess.update(comment);
     }
 
     public void update(Integer id, User user, Post post, String content, Date date)
@@ -48,7 +48,7 @@ public class CommentService implements Serializable
         comment.setPost(post);
         comment.setContent(content);
         comment.setDate(date);
-        commentAccess.Update(comment);
+        commentAccess.update(comment);
     }
 
     public Comment getById(Integer id)

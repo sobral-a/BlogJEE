@@ -36,7 +36,7 @@ public class BlogService implements Serializable
     {
         Blog blog = blogAccess.getById(Blog.class, id);
         blog.setIsDeleted(true);
-        blogAccess.Update(id);
+        blogAccess.update(id);
     }
 
     public void update(Integer id, User user, String theme, String title)
@@ -46,7 +46,7 @@ public class BlogService implements Serializable
         blog.setTitle(title);
         blog.setTheme(theme);
         blog.setIsDeleted(false);
-        blogAccess.Update(blog);
+        blogAccess.update(blog);
     }
 
     public Blog getById(Integer id)
