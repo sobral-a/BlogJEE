@@ -13,8 +13,7 @@
     <h:outputText value="#{sessionScope['userId']}" style="font-weight: bold"/>
     <h:outputText value="#{sessionScope['userRole']}" style="font-weight: bold"/>
     <h1>Blogs</h1>
-    <p:commandButton value="Add blog" actionListener="#{blogController.setBlog(blog)}" icon="ui-icon-plusthick" />
-
+    <p:commandButton value="Add blog" actionListener="#{blogController.addBlogForm()}" icon="ui-icon-plusthick" />
     <h:form>
         <p:dataScroller id="blogsList" value="#{blogsController.getBlogList()}" var="blog" chunkSize="10">
             <f:facet name="header">

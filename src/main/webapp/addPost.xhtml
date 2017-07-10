@@ -10,21 +10,20 @@
 <h:head>
 </h:head>
 <h:body>
-    <h:form id="blogForm">
-        <p:link value="Back to the blogs" id="withIcon" href="blogs.xhtml" icon="ui-icon-caret-1-w" />
+    <p:link value="Back to the post" id="withIcon" href="post.xhtml" icon="ui-icon-caret-1-w" />
+    <h:form id="postForm">
         <p:growl id="growl" showDetail="true" life="3000" />
-        <p:panel header="Add blog" style="width: 450px;">
-            <h:panelGrid id="blogPanel" columns="2">
-                <h:outputText value="Theme" />
-                <p:inputText id="theme" value="#{blogController.theme}"  label="Theme"></p:inputText>
-                <p:spacer></p:spacer>
-                <p:message for="theme" ></p:message>
+        <p:panel header="Add post" style="width: 450px;">
+            <h:panelGrid id="postPanel" columns="2">
                 <h:outputText value="Title" />
-                <p:inputText id="title" value="#{blogController.title}" label="Title"></p:inputText>
+                <p:inputText id="title" value="#{postController.title}" label="Title"></p:inputText>
                 <p:spacer></p:spacer>
                 <p:message for="title" ></p:message>
+                <h:outputText value="Content" />
+                <p:inputText id="content" value="#{postController.content}"  label="Content"></p:inputText>
                 <p:spacer></p:spacer>
-                <p:commandButton action="#{blogController.add(sessionScope['userId'])}" value="Add" update="growl"/>
+                <p:message for="content" ></p:message>
+                <p:commandButton action="#{postController.add(sessionScope['userId'])}" value="Add" update="growl"/>
             </h:panelGrid>
         </p:panel>
     </h:form>

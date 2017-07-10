@@ -1,5 +1,6 @@
 package controllers;
 
+import interceptor.Transaction;
 import lombok.Getter;
 import lombok.Setter;
 import models.Blog;
@@ -10,6 +11,7 @@ import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.transaction.Transactional;
 import java.io.IOException;
 import java.util.Date;
 import java.io.Serializable;
@@ -47,12 +49,14 @@ public class BlogController implements Serializable
         }
     }
 
-    public void add(Integer id) {
+    @Transactional
+    public void add(Integer id) throws IOException {
         if (theme.isEmpty() || title.isEmpty()) {
             addMessage("Fill all fields");
             return;
         }
         blogService.add(userService.getById(id), theme, title, new Date());
+        FacesContext.getCurrentInstance().getExternalContext().redirect("blogs.xhtml");
     }
 
     public void addMessage(String summary) {
@@ -70,4 +74,7 @@ public class BlogController implements Serializable
         blogService.delete(id);
     }
 
+    public void addBlogForm() throws IOException {
+        FacesContext.getCurrentInstance().getExternalContext().redirect("addBlog.xhtml");
+    }
 }

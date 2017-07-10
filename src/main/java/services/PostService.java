@@ -23,7 +23,7 @@ public class PostService implements Serializable
     @Inject
     private GenericAccess postAccess;
 
-    public void add(Blog blog, User user, String title, String content, Date date, Boolean isDeleted)
+    public void add(Blog blog, User user, String title, String content, Date date)
     {
         Post post = new Post();
         post.setUser(user);

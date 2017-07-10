@@ -10,7 +10,14 @@
 <h:head>
 </h:head>
 <p:link value="Back to the blogs" id="withIcon" href="blogs.xhtml" icon="ui-icon-caret-1-w" />
+<br></br>
+<br></br>
+<h:form>
+    <p:commandButton value="Add post" actionListener="#{postController.addPostForm(blogController.getBlog())}" icon="ui-icon-plusthick" />
+</h:form>
 <f:view>
+    <br></br>
+    <br></br>
     <p:fieldset legend="Blog" toggleable="true" toggleSpeed="500">
         <p:ajax event="toggle" listener="#{fieldsetView.handleToggle}" />
         <h:panelGrid columns="2" style="width:100%" columnClasses="detail">

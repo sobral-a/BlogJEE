@@ -1,8 +1,8 @@
-CREATE DATABASE  IF NOT EXISTS `blogJEE` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci */;
-USE `blogJEE`;
+CREATE DATABASE  IF NOT EXISTS `blogjee` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci */;
+USE `blogjee`;
 -- MySQL dump 10.13  Distrib 5.7.17, for macos10.12 (x86_64)
 --
--- Host: localhost    Database: blogJEE
+-- Host: localhost    Database: blogjee
 -- ------------------------------------------------------
 -- Server version	5.7.18
 
@@ -34,7 +34,7 @@ CREATE TABLE `blog` (
   PRIMARY KEY (`id`),
   KEY `fk_user_idx` (`id_user`),
   CONSTRAINT `fk_user` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -77,9 +77,9 @@ CREATE TABLE `post` (
   PRIMARY KEY (`id`),
   KEY `id_blog_idx` (`id_blog`),
   KEY `id_user_post_idx` (`id_user`),
-  CONSTRAINT `id_blog` FOREIGN KEY (`id_blog`) REFERENCES `post` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `id_user_post` FOREIGN KEY (`id_user`) REFERENCES `post` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  CONSTRAINT `id_blog_post` FOREIGN KEY (`id_blog`) REFERENCES `blog` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `id_user_post` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -99,7 +99,7 @@ CREATE TABLE `user` (
   `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email_UNIQUE` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -111,4 +111,4 @@ CREATE TABLE `user` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-07-10 11:21:37
+-- Dump completed on 2017-07-11  0:12:06
