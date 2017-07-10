@@ -11,23 +11,28 @@
 </h:head>
 <f:view>
     <h3>Blogs</h3>
-    <c:forEach var="blog" items="#{blogsController.getBlogList()}">
-        <p:panel id="toggleable" header="Toggleable" toggleable="true" closable="true" toggleSpeed="500" closeSpeed="500" widgetVar="panel" style="margin-bottom:20px">
-
-            <h:panelGrid columns="2" cellpadding="10">
-                <h:outputText value="${blog.getTitle()}" />
-            </h:panelGrid>
-
-            <f:facet name="options">
-                <p:menu>
-                    <p:submenu label="Settings">
-                        <p:menuitem value="Toggle" url="#" icon="ui-icon-newwin" onclick="PF('panel').toggle()" />
-                        <p:menuitem value="Remove" url="#" icon="ui-icon-close" onclick="PF('panel').close()" />
-                    </p:submenu>
-                </p:menu>
+    <h:form>
+        <p:dataScroller value="#{blogsController.getBlogList()}" var="blog" chunkSize="10">
+            <f:facet name="header">
+                All the blogs
             </f:facet>
-        </p:panel>
-    </c:forEach>
+
+            <h:panelGrid columns="2" style="width:100%" columnClasses="detail">
+                <p:outputPanel>
+                    <h:panelGrid columns="2" cellpadding="5">
+                        <h:outputText value="Author:" />
+                        <h:outputText value="#{blog.getTitle()}" style="font-weight: bold"/>
+
+                        <h:outputText value="Date:" />
+                        <h:outputText value="#{blog.getCreationDate().toString()}" style="font-weight: bold"/>
+
+                        <h:outputText value="Author:" />
+                        <h:outputText value="#{blog.getUser().getFirstName().concat(' ').concat(blog.getUser().getName())}" style="font-weight: bold"/>
+                    </h:panelGrid>
+                </p:outputPanel>
+            </h:panelGrid>
+        </p:dataScroller>
+    </h:form>
 
 </f:view>
 </html>
