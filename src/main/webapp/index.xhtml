@@ -8,34 +8,31 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:head>
 </h:head>
-<f:view>
-    <h:outputLabel value="${userController.getUser(1).toString()}"/>
-    <h:outputLabel value="${userController.getName()}"/>
-    <p:dataTable id="table" var="user" value="#{userController.getUserList()}">
-        <p:column headerText="Id">
-            <h:outputText value="#{user.id}" />
-        </p:column>
-
-        <p:column headerText="email">
-            <h:outputText value="#{user.email}" />
-        </p:column>
-
-        <p:column headerText="name">
-            <h:outputText value="#{user.name}" />
-        </p:column>
-
-        <p:column headerText="actions">
-            <h:form>
-                <p:commandButton value="Delete" update="table" action="#{userController.delete(user.id)}"/>
-            </h:form>
-        </p:column>
-    </p:dataTable>
-    <h:form >
-        <p:outputLabel>Login</p:outputLabel>
-        <p:inputText binding="#{login}"></p:inputText>
-        <p:outputLabel>Email</p:outputLabel>
-        <p:inputText binding="#{email}"></p:inputText>
-        <p:commandButton value="Add user" action="#{userController.add(email.value, login.value)}" update="table"/>
+<h:body>
+    <h:form id="loginForm">
+        <p:growl id="msg" showDetail="true" life="3000" />
+        <p:panel header="Register" style="width: 360px;">
+            <h:panelGrid id="registerPanel" columns="2">
+                <h:outputText value="Email" />
+                <p:inputText id="email" binding="#{email}" required="true" label="Email"></p:inputText>
+                <p:spacer></p:spacer>
+                <p:message for="email" ></p:message>
+                <h:outputText value="Name" />
+                <p:inputText id="name" binding="#{name}" required="true" label="Name"></p:inputText>
+                <p:spacer></p:spacer>
+                <p:message for="name" ></p:message>
+                <h:outputText value="Firstname" />
+                <p:inputText id="firstname" binding="#{firstname}" required="true" label="Firstname"></p:inputText>
+                <p:spacer></p:spacer>
+                <p:message for="firstname" ></p:message>
+                <h:outputText value="Password" />
+                <p:password id="password" value="#{loginBean.password}"  feedback="false"></p:password>
+                <p:spacer></p:spacer>
+                <p:message for="password"></p:message>
+                <p:spacer></p:spacer>
+                <p:commandButton action="${userController.add(email.value, name.value, firstname.value, password.value)}" value="Register" />
+            </h:panelGrid>
+        </p:panel>
     </h:form>
-</f:view>
+</h:body>
 </html>
