@@ -9,6 +9,7 @@
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 <h:head>
 </h:head>
+<p:link value="Back to the blogs" id="withIcon" href="blogs.xhtml" icon="ui-icon-caret-1-w" />
 <f:view>
     <p:fieldset legend="Blog" toggleable="true" toggleSpeed="500">
         <p:ajax event="toggle" listener="#{fieldsetView.handleToggle}" />
@@ -32,8 +33,15 @@
         </h:panelGrid>
     </p:fieldset>
 
+    <c:if test="${blogController.getBlog().getPosts().size() == 0}">
+        <h2>The blog hasn't posts</h2>
+    </c:if>
+
+    <c:if test="${blogController.getBlog().getPosts().size() > 0}">
+        <h2><h:outputLabel value="${blogController.getBlog().getTitle()}"/>'s posts </h2>
+    </c:if>
     <c:forEach var="post" items="${blogController.getBlog().getPosts()}">
-        <p:panel id="toggleable" header="${post.getTitle()}" toggleable="true" closable="true" toggleSpeed="500" closeSpeed="500" widgetVar="panel" style="margin-bottom:20px">
+        <p:fieldset legend="#{post.getTitle()}" toggleable="true" toggleSpeed="500">
 
             <h:panelGrid columns="2" cellpadding="10">
                 <h:outputText value="${post.getContent()}" />
@@ -47,7 +55,7 @@
                     </p:submenu>
                 </p:menu>
             </f:facet>
-        </p:panel>
+        </p:fieldset>
     </c:forEach>
 
 </f:view>
