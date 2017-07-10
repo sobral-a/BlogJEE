@@ -48,7 +48,7 @@ public class Post
     private Boolean isDeleted;
 
     @XmlElement
-    @OneToMany(cascade = CascadeType.ALL, mappedBy="post")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy="post", fetch = FetchType.EAGER)
     private List<Comment> comments = new ArrayList<>();
 
 

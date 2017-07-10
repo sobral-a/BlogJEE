@@ -31,7 +31,7 @@ public class PostController implements Serializable
         this.post = post;
         try
         {
-            FacesContext.getCurrentInstance().getExternalContext().redirect("blog.xhtml");
+            FacesContext.getCurrentInstance().getExternalContext().redirect("post.xhtml");
         } catch (IOException e)
         {
             e.printStackTrace();

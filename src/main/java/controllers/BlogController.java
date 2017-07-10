@@ -4,25 +4,23 @@ import lombok.Getter;
 import lombok.Setter;
 import models.Blog;
 import services.BlogService;
-import services.BlogService;
 import services.UserService;
-
-import javax.enterprise.context.ApplicationScoped;
 import javax.faces.application.FacesMessage;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.IOException;
 import java.util.Date;
-import java.util.List;
+import java.io.Serializable;
 
 /**
  * Created by alexa on 10/07/2017.
  */
 
-@ApplicationScoped
+@SessionScoped
 @Named("blogController")
-public class BlogController
+public class BlogController implements Serializable
 {
     @Getter @Setter
     private String title;

@@ -9,7 +9,7 @@
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 <h:head>
 </h:head>
-<p:link value="Back to the blogs" id="withIcon" href="blogs.xhtml" icon="ui-icon-caret-1-w" />
+<p:link value="Back to the blog" id="withIcon" href="blog.xhtml" icon="ui-icon-caret-1-w" />
 <f:view>
     <p:fieldset legend="Blog" toggleable="true" toggleSpeed="500">
         <p:ajax event="toggle" listener="#{fieldsetView.handleToggle}" />
@@ -17,38 +17,38 @@
 
             <p:outputPanel>
                 <h:panelGrid columns="2" cellpadding="5">
+                    <h:outputText value="From blog:" />
+                    <h:outputText value="${postController.getPost().getBlog().getTitle()}" style="font-weight: bold"/>
+
                     <h:outputText value="Title:" />
-                    <h:outputText value="${blogController.getBlog().getTitle()}" style="font-weight: bold"/>
+                    <h:outputText value="${postController.getPost().getTitle()}" style="font-weight: bold"/>
 
                     <h:outputText value="Date:" />
-                    <h:outputText value="${blogController.getBlog().getCreationDate().toString()}" style="font-weight: bold"/>
+                    <h:outputText value="${postController.getPost().getCreationDate().toString()}" style="font-weight: bold"/>
 
                     <h:outputText value="Author:" />
-                    <h:outputText value="${blogController.getBlog().getUser().getFirstName().concat(' ').concat(blogController.getBlog().getUser().getName())}" style="font-weight: bold"/>
+                    <h:outputText value="${postController.getPost().getUser().getFirstName().concat(' ').concat(blogController.getBlog().getUser().getName())}" style="font-weight: bold"/>
 
-                    <h:outputText value="Posts:" />
-                    <h:outputText value="${blogController.getBlog().getPosts().size()}" style="font-weight: bold"/>
+                    <h:outputText value="Comments:" />
+                    <h:outputText value="${postController.getPost().getComments().size()}" style="font-weight: bold"/>
                 </h:panelGrid>
             </p:outputPanel>
         </h:panelGrid>
     </p:fieldset>
 
-    <c:if test="${blogController.getBlog().getPosts().size() == 0}">
-        <h2>The blog hasn't posts</h2>
+    <c:if test="${postController.getPost().getComments().size() == 0}">
+        <h2>The blog hasn't comments yet</h2>
     </c:if>
 
-    <c:if test="${blogController.getBlog().getPosts().size() > 0}">
-        <h2><h:outputLabel value="${blogController.getBlog().getTitle()}"/>'s posts </h2>
+    <c:if test="${postController.getPost().getComments().size() > 0}">
+        <h2><h:outputLabel value="${postController.getPost().getBlog().getTitle()}"/>'s comments </h2>
     </c:if>
-    <c:forEach var="post" items="${blogController.getBlog().getPosts()}">
-        <p:fieldset legend="#{post.getTitle()}" toggleable="true" toggleSpeed="500">
+    <c:forEach var="comment" items="${postController.getPost().getComments()}">
+        <p:fieldset legend="#{comment.getUser().getFirstName().concat(' ').concat(comment.getUser().getName()).concat(' ').concat(comment.getCreationDate().toString())}" toggleable="true" toggleSpeed="500">
 
-            <h:panelGrid columns="2" cellpadding="10">
-                <h:outputText value="${post.getContent()}" />
+            <h:panelGrid columns="100" cellpadding="10">
+                <h:outputText value="${comment.getContent()}" />
             </h:panelGrid>
-            <h:form>
-                <p:commandButton value="Visit this post" id="withIcon" actionListener="#{postController.setPost(post)}" icon="ui-icon-document" />
-            </h:form>
 
             <f:facet name="options">
                 <p:menu>
