@@ -40,7 +40,7 @@ public class Post
     private String content;
 
     @XmlElement
-    @Column
+    @Column(name = "creation_date")
     private Date creationDate;
 
     @XmlElement
@@ -50,5 +50,24 @@ public class Post
     @XmlElement
     @OneToMany(cascade = CascadeType.ALL, mappedBy="post")
     private List<Comment> comments = new ArrayList<>();
+
+
+    @Override
+    public String toString()
+    {
+        StringBuilder builder = new StringBuilder();
+        builder.append("Blog: ");
+        builder.append(this.blog.getTitle()+ '\n');
+        builder.append("Title: ");
+        builder.append(this.title + '\n');
+        builder.append("Content: ");
+        builder.append(this.content + '\n');
+        builder.append("User: ");
+        builder.append(this.user.getName() + '\n');
+        builder.append("Date: ");
+        builder.append(this.creationDate.toString() + '\n');
+        return builder.toString();
+    }
+
 
 }

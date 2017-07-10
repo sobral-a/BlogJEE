@@ -35,7 +35,7 @@ public class Blog
     private String theme;
 
     @XmlElement
-    @Column
+    @Column(name = "creation_date")
     private Date creationDate;
 
     @XmlElement
@@ -45,4 +45,15 @@ public class Blog
     @XmlElement
     @OneToMany(cascade = CascadeType.ALL, mappedBy="blog")
     private List<Post> posts = new ArrayList<>();
+
+    @Override
+    public String toString()
+    {
+        StringBuilder builder = new StringBuilder();
+        builder.append("Theme: ");
+        builder.append(this.theme + '\n');
+        builder.append("Creation Date: ");
+        builder.append(this.creationDate.toString() + '\n');
+        return builder.toString();
+    }
 }

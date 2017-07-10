@@ -1,5 +1,9 @@
 package main;
 
+import models.User;
+import services.UserService;
+
+import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -7,6 +11,7 @@ import javax.persistence.PersistenceContext;
  * Created by Kevin on 10/06/2017.
  */
 
+@ApplicationScoped
 public class Main {
 
     @PersistenceContext(unitName = "context")
@@ -25,5 +30,6 @@ public class Main {
         System.out.println(user.toString());
 
         container.shutdown();*/
+
     }
 }

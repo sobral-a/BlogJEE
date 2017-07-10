@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+<h:head>
+</h:head>
+<f:view>
+    <h3>Blogs</h3>
+    <c:forEach var="blog" items="#{blogsController.getBlogList()}">
+        <p:panel id="toggleable" header="Toggleable" toggleable="true" closable="true" toggleSpeed="500" closeSpeed="500" widgetVar="panel" style="margin-bottom:20px">
+
+            <h:panelGrid columns="2" cellpadding="10">
+                <h:outputText value="${blog.getTitle()}" />
+            </h:panelGrid>
+
+            <f:facet name="options">
+                <p:menu>
+                    <p:submenu label="Settings">
+                        <p:menuitem value="Toggle" url="#" icon="ui-icon-newwin" onclick="PF('panel').toggle()" />
+                        <p:menuitem value="Remove" url="#" icon="ui-icon-close" onclick="PF('panel').close()" />
+                    </p:submenu>
+                </p:menu>
+            </f:facet>
+        </p:panel>
+    </c:forEach>
+
+</f:view>
+</html>

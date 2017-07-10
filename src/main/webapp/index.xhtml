@@ -9,6 +9,7 @@
 <h:head>
 </h:head>
 <f:view>
+    <h:outputLabel value="${userController.getUser(1).toString()}"/>
     <h:outputLabel value="${userController.getName()}"/>
     <p:dataTable id="table" var="user" value="#{userController.getUserList()}">
         <p:column headerText="Id">
@@ -19,8 +20,8 @@
             <h:outputText value="#{user.email}" />
         </p:column>
 
-        <p:column headerText="login">
-            <h:outputText value="#{user.login}" />
+        <p:column headerText="name">
+            <h:outputText value="#{user.name}" />
         </p:column>
 
         <p:column headerText="actions">

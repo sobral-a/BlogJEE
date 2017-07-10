@@ -48,4 +48,18 @@ public class Comment
     @Column
     private Boolean isDeleted;
 
+
+    @Override
+    public String toString()
+    {
+        StringBuilder builder = new StringBuilder();
+        builder.append("post: ");
+        builder.append(this.post.getTitle()+ '\n');
+        builder.append("Content: ");
+        builder.append(this.content + '\n');
+        builder.append("Date: ");
+        builder.append(this.date.toString() + '\n');
+        return builder.toString();
+    }
+
 }

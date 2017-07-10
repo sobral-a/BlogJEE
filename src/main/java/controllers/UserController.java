@@ -27,10 +27,16 @@ public class UserController
 
     public List<User> getUserList()
     {
-        return userService.list();
+        List<User> users = userService.list();
+        return users;
     }
 
-    @Transactional
+    public User getUser(Integer id)
+    {
+        User user = userService.getById(id);
+        return user;
+    }
+
     public void delete(Integer id)
     {
         userService.delete(id);
