@@ -18,7 +18,7 @@ import java.io.Serializable;
  */
 
 @SessionScoped
-@Named("blogController")
+@Named("postController")
 public class PostController implements Serializable
 {
     @Inject
