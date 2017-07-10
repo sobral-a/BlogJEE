@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+</h:head>
+<f:view>
+    <h:outputLabel value="${userController.getName()}"/>
+    <p:dataTable id="table" var="user" value="#{userController.getUserList()}">
+        <p:column headerText="Id">
+            <h:outputText value="#{user.id}" />
+        </p:column>
+
+        <p:column headerText="email">
+            <h:outputText value="#{user.email}" />
+        </p:column>
+
+        <p:column headerText="login">
+            <h:outputText value="#{user.login}" />
+        </p:column>
+
+        <p:column headerText="actions">
+            <h:form>
+                <p:commandButton value="Delete" update="table" action="#{userController.delete(user.id)}"/>
+            </h:form>
+        </p:column>
+    </p:dataTable>
+    <h:form >
+        <p:outputLabel>Login</p:outputLabel>
+        <p:inputText binding="#{login}"></p:inputText>
+        <p:outputLabel>Email</p:outputLabel>
+        <p:inputText binding="#{email}"></p:inputText>
+        <p:commandButton value="Add user" action="#{userController.add(email.value, login.value)}" update="table"/>
+    </h:form>
+</f:view>
+</html>

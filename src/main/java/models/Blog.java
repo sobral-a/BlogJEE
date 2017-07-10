@@ -27,7 +27,7 @@ public class Blog
 
     @XmlElement
     @ManyToOne
-    @JoinColumn("id_user")
+    @JoinColumn(name = "id_user")
     private User user;
 
     @XmlElement
@@ -43,15 +43,6 @@ public class Blog
     private Boolean isDeleted;
 
     @XmlElement
-    @OneToMany(cascade = CascadeType.ALL, mappedBy="user")
-    private List<Media> medias = new ArrayList<>();
-
-    @XmlElement
-    @OneToMany(cascade = CascadeType.ALL, mappedBy="userSharing")
-    private List<Sharing> sharings = new ArrayList<>();
-
-    @XmlElement
-    @OneToMany(cascade = CascadeType.ALL, mappedBy="userShared")
-    private List<Sharing> shared = new ArrayList<>();
-
+    @OneToMany(cascade = CascadeType.ALL, mappedBy="blog")
+    private List<Post> posts = new ArrayList<>();
 }

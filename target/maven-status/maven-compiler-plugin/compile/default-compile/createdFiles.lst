@@ -1,0 +1,14 @@
+interceptor\Transaction.class
+services\UserService.class
+models\User.class
+controllers\UserController.class
+webservices\API.class
+main\Main.class
+models\Comment.class
+interceptor\TransactionIntercept.class
+producers\EntityManagerProducer.class
+models\Post.class
+dao\GenericAccess.class
+webservices\WebService.class
+webservices\UserService.class
+models\Blog.class

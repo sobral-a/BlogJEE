@@ -21,7 +21,7 @@ public class UserService
     {
         User user = new User();
         user.setEmail(email);
-        user.setLogin(login);
+        //user.setLogin(login);
         userAccess.add(user);
     }
 

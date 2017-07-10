@@ -11,7 +11,6 @@ import java.util.List;
  */
 public class Comment
 {
-
     @XmlElement
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,12 +19,12 @@ public class Comment
 
     @XmlElement
     @ManyToOne
-    @JoinColumn("id_user")
+    @JoinColumn(name = "id_user")
     private User user;
 
     @XmlElement
     @ManyToOne
-    @JoinColumn("id_post")
+    @JoinColumn(name = "id_post")
     private Post post;
 
     @XmlElement
@@ -39,18 +38,5 @@ public class Comment
     @XmlElement
     @Column
     private Boolean isDeleted;
-
-    @XmlElement
-    @OneToMany(cascade = CascadeType.ALL, mappedBy="user")
-    private List<Blog> blogs = new ArrayList<>();
-
-    @XmlElement
-    @OneToMany(cascade = CascadeType.ALL, mappedBy="userSharing")
-    private List<Comment> comments = new ArrayList<>();
-
-    @XmlElement
-    @OneToMany(cascade = CascadeType.ALL, mappedBy="userShared")
-    private List<Sharing> shared = new ArrayList<>();
-
 
 }

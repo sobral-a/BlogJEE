@@ -47,7 +47,7 @@ public class UserService
     {
         try
         {
-            userService.add(user.getLogin(), user.getEmail());
+            userService.add(user.getEmail(), user.getEmail());
             ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
             return ow.writeValueAsString(true);
         }

@@ -1,0 +1,3 @@
+<interceptors>
+    <class>interceptor.TransactionIntercept</class>
+</interceptors>
