@@ -1,5 +1,9 @@
 package models;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlElement;
 import java.util.ArrayList;
@@ -9,6 +13,10 @@ import java.util.List;
 /**
  * Created by alexa on 10/07/2017.
  */
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
 public class Comment
 {
     @XmlElement
