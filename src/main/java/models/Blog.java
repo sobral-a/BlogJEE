@@ -43,7 +43,7 @@ public class Blog
     private Boolean isDeleted;
 
     @XmlElement
-    @OneToMany(cascade = CascadeType.ALL, mappedBy="blog")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy="blog", fetch = FetchType.EAGER)
     private List<Post> posts = new ArrayList<>();
 
     @Override

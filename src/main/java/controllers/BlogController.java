@@ -5,8 +5,10 @@ import services.BlogService;
 import services.BlogService;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -20,16 +22,23 @@ public class BlogController
     @Inject
     private BlogService blogService;
 
-    public List<Blog> getBlogList()
+    private Blog blog;
+
+    public void setBlog(Blog blog)
     {
-        List<Blog> blogs = blogService.list();
-        return blogs;
+        this.blog = blog;
+        try
+        {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("blog.xhtml");
+        } catch (IOException e)
+        {
+            e.printStackTrace();
+        }
     }
 
-    public Blog getBlog(Integer id)
+    public Blog getBlog()
     {
-        Blog blog = blogService.getById(id);
-        return blog;
+        return this.blog;
     }
 
     public void delete(Integer id)

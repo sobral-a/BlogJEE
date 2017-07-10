@@ -10,12 +10,33 @@
 <h:head>
 </h:head>
 <f:view>
-    <h3>Blogs</h3>
-    <c:forEach var="blog" items="#{blogsController.getBlogList()}">
-        <p:panel id="toggleable" header="${blog.getTitle()}" toggleable="true" closable="true" toggleSpeed="500" closeSpeed="500" widgetVar="panel" style="margin-bottom:20px">
+    <p:fieldset legend="Blog" toggleable="true" toggleSpeed="500">
+        <p:ajax event="toggle" listener="#{fieldsetView.handleToggle}" />
+        <h:panelGrid columns="2" style="width:100%" columnClasses="detail">
+
+            <p:outputPanel>
+                <h:panelGrid columns="2" cellpadding="5">
+                    <h:outputText value="Title:" />
+                    <h:outputText value="${blogController.getBlog().getTitle()}" style="font-weight: bold"/>
+
+                    <h:outputText value="Date:" />
+                    <h:outputText value="${blogController.getBlog().getCreationDate().toString()}" style="font-weight: bold"/>
+
+                    <h:outputText value="Author:" />
+                    <h:outputText value="${blogController.getBlog().getUser().getFirstName().concat(' ').concat(blogController.getBlog().getUser().getName())}" style="font-weight: bold"/>
+
+                    <h:outputText value="Posts:" />
+                    <h:outputText value="${blogController.getBlog().getPosts().size()}" style="font-weight: bold"/>
+                </h:panelGrid>
+            </p:outputPanel>
+        </h:panelGrid>
+    </p:fieldset>
+
+    <c:forEach var="post" items="${blogController.getBlog().getPosts()}">
+        <p:panel id="toggleable" header="${post.getTitle()}" toggleable="true" closable="true" toggleSpeed="500" closeSpeed="500" widgetVar="panel" style="margin-bottom:20px">
 
             <h:panelGrid columns="2" cellpadding="10">
-                <h:outputText value="${blog.getContent()}" />
+                <h:outputText value="${post.getContent()}" />
             </h:panelGrid>
 
             <f:facet name="options">

@@ -20,7 +20,7 @@
             <h:panelGrid columns="2" style="width:100%" columnClasses="detail">
                 <p:outputPanel>
                     <h:panelGrid columns="2" cellpadding="5">
-                        <h:outputText value="Author:" />
+                        <h:outputText value="Title:" />
                         <h:outputText value="#{blog.getTitle()}" style="font-weight: bold"/>
 
                         <h:outputText value="Date:" />
@@ -28,6 +28,10 @@
 
                         <h:outputText value="Author:" />
                         <h:outputText value="#{blog.getUser().getFirstName().concat(' ').concat(blog.getUser().getName())}" style="font-weight: bold"/>
+
+                        <h:outputText value="Posts:" />
+                        <h:outputText value="#{blog.getPosts().size()}" style="font-weight: bold"/>
+                        <p:commandButton value="Visit the blog" id="withIcon" actionListener="#{blogController.setBlog(blog)}" icon="ui-icon-document" />
                     </h:panelGrid>
                 </p:outputPanel>
             </h:panelGrid>
