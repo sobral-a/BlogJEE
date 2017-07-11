@@ -3,46 +3,54 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      >
 <h:head>
 </h:head>
-<f:view>
-    <h1>Blogs</h1>
-    <p:commandButton value="Add blog" actionListener="#{blogController.addBlogForm()}" icon="ui-icon-plusthick" />
-    <br></br>
-    <br></br>
-    <h:form>
-        <p:dataScroller id="dataScroller" value="#{blogsController.getBlogList()}" var="blog" chunkSize="10">
-            <f:facet name="header">
-                All the blogs
-            </f:facet>
-            <h:panelGrid columns="2" style="width:100%" columnClasses="detail">
-                <p:outputPanel>
-                    <h:panelGrid columns="2" cellpadding="5">
-                        <h:outputText value="Title:" />
-                        <h:outputText value="#{blog.getTitle()}" style="font-weight: bold"/>
+<ui:composition template="navbar.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+>
+    <ui:define name="content">
+        <f:view>
+            <h1>Blogs</h1>
+            <h:form>
+                <p:commandButton value="Add blog" actionListener="#{blogController.addBlogForm()}" icon="ui-icon-plusthick" />
+            </h:form>
+            <br></br>
+            <h:form>
+                <p:dataScroller id="dataScroller" value="#{blogsController.getBlogList()}" var="blog" chunkSize="10">
+                    <f:facet name="header">
+                        All the blogs
+                    </f:facet>
+                    <h:panelGrid columns="2" style="width:100%" columnClasses="detail">
+                        <p:outputPanel>
+                            <h:panelGrid columns="2" cellpadding="5">
+                                <h:outputText value="Title:" />
+                                <h:outputText value="#{blog.getTitle()}" style="font-weight: bold"/>
 
-                        <h:outputText value="Date:" />
-                        <h:outputText value="#{blog.getCreationDate().toString()}" style="font-weight: bold"/>
+                                <h:outputText value="Date:" />
+                                <h:outputText value="#{blog.getCreationDate().toString()}" style="font-weight: bold"/>
 
-                        <h:outputText value="Theme:" />
-                        <h:outputText value="#{blog.getTheme()}" style="font-weight: bold"/>
+                                <h:outputText value="Theme:" />
+                                <h:outputText value="#{blog.getTheme()}" style="font-weight: bold"/>
 
-                        <h:outputText value="Author:" />
-                        <h:outputText value="#{blog.getUser().getFirstName().concat(' ').concat(blog.getUser().getName())}" style="font-weight: bold"/>
+                                <h:outputText value="Author:" />
+                                <h:outputText value="#{blog.getUser().getFirstName().concat(' ').concat(blog.getUser().getName())}" style="font-weight: bold"/>
 
-                        <h:outputText value="Posts:" />
-                        <h:outputText value="#{blog.getPosts().size()}" style="font-weight: bold"/>
-                        <p:commandButton value="Visit the blog" id="withIcon" actionListener="#{blogController.setBlog(blog)}" icon="ui-icon-document" />
-                        <p:commandButton rendered="${(sessionScope['userId'] == blog.getUser().getId()) or (sessionScope['userRole'] == 'admin')}" value="Delete blog" icon="ui-icon-close" actionListener="#{blogController.delete(blog)}"/>
+                                <h:outputText value="Posts:" />
+                                <h:outputText value="#{blog.getPosts().size()}" style="font-weight: bold"/>
+                                <p:commandButton value="Visit the blog" id="withIcon" actionListener="#{blogController.setBlog(blog)}" icon="ui-icon-document" />
+                                <p:commandButton rendered="${(sessionScope['userId'] == blog.getUser().getId()) or (sessionScope['userRole'] == 'admin')}" value="Delete blog" icon="ui-icon-close" actionListener="#{blogController.delete(blog)}"/>
+                            </h:panelGrid>
+                        </p:outputPanel>
                     </h:panelGrid>
-                </p:outputPanel>
-            </h:panelGrid>
-        </p:dataScroller>
-    </h:form>
-
-</f:view>
+                </p:dataScroller>
+            </h:form>
+        </f:view>
+    </ui:define>
+</ui:composition>
 </html>

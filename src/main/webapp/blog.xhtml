@@ -6,73 +6,76 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core" xmlns:h="http://java.sun.com/jsf/html">
 <h:head>
 </h:head>
-<p:link value="Back to the blogs" id="withIcon" href="blogs.xhtml" icon="ui-icon-caret-1-w" />
-<br></br>
-<br></br>
-<c:if test="#{(Integer.parseInt(sessionScope['userId']) == blog.getUser().getId()) or (sessionScope['userRole'] == 'admin')}" >
-    <h:form>
-        <p:commandButton value="Add post" actionListener="#{postController.addPostForm(blogController.getBlog())}" icon="ui-icon-plusthick" />
-    </h:form>
-</c:if>
-<f:view>
-    <br></br>
-    <br></br>
-    <p:fieldset legend="Blog" toggleable="true" toggleSpeed="500">
-        <p:ajax event="toggle" listener="#{fieldsetView.handleToggle}" />
-        <h:panelGrid columns="2" style="width:100%" columnClasses="detail">
+<ui:composition template="navbar.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                >
+    <ui:define name="content">
+        <f:view>
+            <h:form>
+                <p:link value="Back to the blogs" id="withIcon" href="blogs.xhtml" icon="ui-icon-caret-1-w" />
+            </h:form>
+            <h:form>
+                <p:commandButton value="Add post" actionListener="#{postController.addPostForm(blogController.getBlog())}" icon="ui-icon-plusthick" />
+            </h:form>
+            <br></br>
+            <br></br>
+            <p:fieldset legend="Blog" toggleable="true" toggleSpeed="500">
+                <p:ajax event="toggle" listener="#{fieldsetView.handleToggle}" />
+                <h:panelGrid columns="2" style="width:100%" columnClasses="detail">
 
-            <p:outputPanel>
-                <h:panelGrid columns="2" cellpadding="5">
-                    <h:outputText value="Title:" />
-                    <h:outputText value="${blogController.getBlog().getTitle()}" style="font-weight: bold"/>
+                    <p:outputPanel>
+                        <h:panelGrid columns="2" cellpadding="5">
+                            <h:outputText value="Title:" />
+                            <h:outputText value="${blogController.getBlog().getTitle()}" style="font-weight: bold"/>
 
-                    <h:outputText value="Date:" />
-                    <h:outputText value="${blogController.getBlog().getCreationDate().toString()}" style="font-weight: bold"/>
+                            <h:outputText value="Date:" />
+                            <h:outputText value="${blogController.getBlog().getCreationDate().toString()}" style="font-weight: bold"/>
 
-                    <h:outputText value="Author:" />
-                    <h:outputText value="${blogController.getBlog().getUser().getFirstName().concat(' ').concat(blogController.getBlog().getUser().getName())}" style="font-weight: bold"/>
+                            <h:outputText value="Author:" />
+                            <h:outputText value="${blogController.getBlog().getUser().getFirstName().concat(' ').concat(blogController.getBlog().getUser().getName())}" style="font-weight: bold"/>
 
+                        </h:panelGrid>
+                    </p:outputPanel>
                 </h:panelGrid>
-            </p:outputPanel>
-
-        </h:panelGrid>
-    </p:fieldset>
-
-    <c:if test="${blogController.getBlog().getPosts().size() == 0}">
-        <h2>The blog hasn't posts</h2>
-    </c:if>
-
-    <c:if test="${blogController.getBlog().getPosts().size() > 0}">
-        <h2><h:outputLabel value="${blogController.getBlog().getTitle()}"/>'s posts </h2>
-    </c:if>
-    <c:forEach var="post" items="${blogController.getBlog().getPosts()}">
-        <c:if test="${post.getIsDeleted() == false}">
-            <p:fieldset legend="#{post.getTitle()}" toggleable="true" toggleSpeed="500">
-
-                <h:panelGrid columns="2" cellpadding="10">
-                    <h:outputText value="${post.getContent()}" />
-                </h:panelGrid>
-                <h:form>
-                    <p:commandButton value="Visit this post" id="withIcon" actionListener="#{postController.setPost(post)}" icon="ui-icon-document" />
-                    <p:commandButton rendered="#{(sessionScope['userId'] == blogController.getBlog().getUser().getId()) or (sessionScope['userRole'] == 'admin')}" value="Delete post" icon="ui-icon-close" actionListener="#{postController.delete(post)}"/>
-                </h:form>
-
-                <f:facet name="options">
-                    <p:menu>
-                        <p:submenu label="Settings">
-                            <p:menuitem value="Toggle" url="#" icon="ui-icon-newwin" onclick="PF('panel').toggle()" />
-                            <p:menuitem value="Remove" url="#" icon="ui-icon-close" onclick="PF('panel').close()" />
-                        </p:submenu>
-                    </p:menu>
-                </f:facet>
             </p:fieldset>
-            <br></br>
-            <br></br>
-        </c:if>
-    </c:forEach>
 
-</f:view>
+            <c:if test="${blogController.getBlog().getPosts().size() == 0}">
+                <h2>The blog hasn't posts</h2>
+            </c:if>
+
+            <c:if test="${blogController.getBlog().getPosts().size() > 0}">
+                <h2><h:outputLabel value="${blogController.getBlog().getTitle()}"/>'s posts </h2>
+            </c:if>
+            <c:forEach var="post" items="${blogController.getBlog().getPosts()}">
+                <c:if test="${post.getIsDeleted() == false}">
+                    <p:fieldset legend="#{post.getTitle()}" toggleable="true" toggleSpeed="500">
+                        <h:panelGrid columns="2" cellpadding="10">
+                            <h:outputText value="${post.getContent()}" />
+                        </h:panelGrid>
+                        <h:form>
+                            <p:commandButton value="Visit this post" id="withIcon" actionListener="#{postController.setPost(post)}" icon="ui-icon-document" />
+                            <p:commandButton rendered="#{(sessionScope['userId'] == blogController.getBlog().getUser().getId()) or (sessionScope['userRole'] == 'admin')}" value="Delete post" icon="ui-icon-close" actionListener="#{postController.delete(post)}"/>
+                        </h:form>
+                        <f:facet name="options">
+                            <p:menu>
+                                <p:submenu label="Settings">
+                                    <p:menuitem value="Toggle" url="#" icon="ui-icon-newwin" onclick="PF('panel').toggle()" />
+                                    <p:menuitem value="Remove" url="#" icon="ui-icon-close" onclick="PF('panel').close()" />
+                                </p:submenu>
+                            </p:menu>
+                        </f:facet>
+                    </p:fieldset>
+                    <br></br>
+                    <br></br>
+                </c:if>
+            </c:forEach>
+        </f:view>
+    </ui:define>
+</ui:composition>
 </html>

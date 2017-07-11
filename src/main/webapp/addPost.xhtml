@@ -3,29 +3,36 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      >
 <h:head>
 </h:head>
 <h:body>
-    <p:link value="Back to the post" id="withIcon" href="post.xhtml" icon="ui-icon-caret-1-w" />
-    <h:form id="postForm">
-        <p:growl id="growl" showDetail="true" life="3000" />
-        <p:panel header="Add post" style="width: 450px;">
-            <h:panelGrid id="postPanel" columns="2">
-                <h:outputText value="Title" />
-                <p:inputText id="title" value="#{postController.title}" label="Title"></p:inputText>
-                <p:spacer></p:spacer>
-                <p:message for="title" ></p:message>
-                <h:outputText value="Content" />
-                <p:inputTextarea rows="6" cols="33" id="content" value="#{postController.content}"  label="Content"></p:inputTextarea>
-                <p:spacer></p:spacer>
-                <p:message for="content" ></p:message>
-                <p:commandButton action="#{postController.add(sessionScope['userId'])}" value="Add" update="growl"/>
-            </h:panelGrid>
-        </p:panel>
-    </h:form>
+    <ui:composition template="navbar.xhtml"
+                    xmlns="http://www.w3.org/1999/xhtml"
+                    xmlns:h="http://java.sun.com/jsf/html"
+                    xmlns:ui="http://java.sun.com/jsf/facelets"
+                    xmlns:p="http://primefaces.org/ui"
+    >
+        <ui:define name="content">
+            <p:link value="Back to the post" id="withIcon" href="post.xhtml" icon="ui-icon-caret-1-w" />
+            <h:form id="postForm">
+                <p:growl id="growl" showDetail="true" life="3000" />
+                <p:panel header="Add post" style="width: 450px; margin: 0 auto;">
+                    <h:panelGrid id="postPanel" columns="2">
+                        <h:outputText value="Title" />
+                        <p:inputText id="title" value="#{postController.title}" label="Title"></p:inputText>
+                        <p:spacer></p:spacer>
+                        <p:message for="title" ></p:message>
+                        <h:outputText value="Content" />
+                        <p:inputTextarea rows="6" cols="33" id="content" value="#{postController.content}"  label="Content"></p:inputTextarea>
+                        <p:spacer></p:spacer>
+                        <p:message for="content" ></p:message>
+                        <p:commandButton action="#{postController.add(sessionScope['userId'])}" value="Add" update="growl"/>
+                    </h:panelGrid>
+                </p:panel>
+            </h:form>
+        </ui:define>
+    </ui:composition>
 </h:body>
 </html>

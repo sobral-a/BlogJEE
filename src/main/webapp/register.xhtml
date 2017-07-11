@@ -4,36 +4,43 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:p="http://primefaces.org/ui">
 <h:head>
 </h:head>
 <h:body>
-    <h:form id="loginForm">
-        <p:growl id="growl" showDetail="true" life="3000" />
-        <p:panel header="Register" style="width: 450px;">
-            <h:panelGrid id="registerPanel" columns="2">
-                <h:outputText value="Email" />
-                <p:inputText id="email" value="#{userController.email}" label="Email"></p:inputText>
-                <p:spacer></p:spacer>
-                <p:message for="email" ></p:message>
-                <h:outputText value="Name" />
-                <p:inputText id="name" value="#{userController.name}"  label="Name"></p:inputText>
-                <p:spacer></p:spacer>
-                <p:message for="name" ></p:message>
-                <h:outputText value="Firstname" />
-                <p:inputText id="firstname" value="#{userController.firstName}"  label="Firstname"></p:inputText>
-                <p:spacer></p:spacer>
-                <p:message for="firstname" ></p:message>
-                <h:outputText value="Password" />
-                <p:password id="password" value="#{userController.password}"></p:password>
-                <p:spacer></p:spacer>
-                <p:message for="password"></p:message>
-                <p:spacer></p:spacer>
-                <p:commandButton action="#{userController.addUser('user')}" value="Register" update="growl"/>
-            </h:panelGrid>
-        </p:panel>
-    </h:form>
+    <ui:composition template="navbar.xhtml"
+                    xmlns="http://www.w3.org/1999/xhtml"
+                    xmlns:h="http://java.sun.com/jsf/html"
+                    xmlns:ui="http://java.sun.com/jsf/facelets"
+                    xmlns:p="http://primefaces.org/ui"
+    >
+        <ui:define name="content">
+            <h:form id="loginForm">
+                <p:growl id="growl" showDetail="true" life="3000" />
+                <p:panel header="Register" style="width: 450px; margin: 0 auto;">
+                    <h:panelGrid id="registerPanel" columns="2">
+                        <h:outputText value="Email" />
+                        <p:inputText id="email" value="#{userController.email}" label="Email"></p:inputText>
+                        <p:spacer></p:spacer>
+                        <p:message for="email" ></p:message>
+                        <h:outputText value="Name" />
+                        <p:inputText id="name" value="#{userController.name}"  label="Name"></p:inputText>
+                        <p:spacer></p:spacer>
+                        <p:message for="name" ></p:message>
+                        <h:outputText value="Firstname" />
+                        <p:inputText id="firstname" value="#{userController.firstName}"  label="Firstname"></p:inputText>
+                        <p:spacer></p:spacer>
+                        <p:message for="firstname" ></p:message>
+                        <h:outputText value="Password" />
+                        <p:password id="password" value="#{userController.password}"></p:password>
+                        <p:spacer></p:spacer>
+                        <p:message for="password"></p:message>
+                        <p:spacer></p:spacer>
+                        <p:commandButton action="#{userController.addUser('user')}" value="Register" update="growl"/>
+                    </h:panelGrid>
+                </p:panel>
+            </h:form>
+        </ui:define>
+    </ui:composition>
 </h:body>
 </html>

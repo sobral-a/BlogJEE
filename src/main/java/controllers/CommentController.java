@@ -36,7 +36,7 @@ public class CommentController implements Serializable
     private CommentService commentService;
     @Inject
     private UserService userService;
-    
+
     private Post post;
 
     @Transactional
