@@ -56,27 +56,13 @@ public class PostController implements Serializable
 
     public Post getPost()
     {
-        return this.post;
+        Post newPost= postService.getById(this.post.getId());
+        return newPost;
     }
 
     public void delete(Integer id)
     {
         postService.delete(id);
-    }
-
-    @Transactional
-    public void add(Integer id) throws IOException {
-        if (title.isEmpty() || content.isEmpty()) {
-            addMessage("Fill all fields");
-            return;
-        }
-        postService.add(blog ,userService.getById(id), title, content, new Date());
-        FacesContext.getCurrentInstance().getExternalContext().redirect("blogs.xhtml");
-    }
-
-    public void addMessage(String summary) {
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_FATAL, summary,  null);
-        FacesContext.getCurrentInstance().addMessage(null, message);
     }
 
     public void addPostForm(Blog blog) throws IOException {

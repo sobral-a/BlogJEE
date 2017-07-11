@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import models.Blog;
 import services.BlogService;
+import services.PostService;
 import services.UserService;
 import javax.faces.application.FacesMessage;
 import javax.enterprise.context.SessionScoped;
@@ -28,12 +29,15 @@ public class BlogController implements Serializable
     private String title;
     @Getter @Setter
     private String theme;
+    @Getter @Setter
+    private String content;
 
     @Inject
     private BlogService blogService;
-
     @Inject
     private UserService userService;
+    @Inject
+    private PostService postService;
 
     private Blog blog;
 
@@ -57,6 +61,17 @@ public class BlogController implements Serializable
         }
         blogService.add(userService.getById(id), theme, title, new Date());
         FacesContext.getCurrentInstance().getExternalContext().redirect("blogs.xhtml");
+    }
+
+    @Transactional
+    public void addPost(Integer id) throws IOException {
+        if (title.isEmpty() || content.isEmpty()) {
+            addMessage("Fill all fields");
+            return;
+        }
+        postService.add(blog ,userService.getById(id), title, content, new Date());
+        Blog newBlog = blogService.getById(blog.getId());
+        setBlog(newBlog);
     }
 
     public void addMessage(String summary) {

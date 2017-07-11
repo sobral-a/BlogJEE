@@ -44,7 +44,7 @@
                 <h3>Comment</h3>
                 <p:inputTextarea rows="1" cols="50" id="comment" value="#{commentController.content}" label="Comment"></p:inputTextarea>
                 <br></br>
-                <p:commandButton action="#{commentController.add(sessionScope['userId'], postController.getPost())}" value="Comment" update=""/>
+                <p:commandButton action="#{commentController.add(sessionScope['userId'], postController.getPost())}" value="Comment" update="commentsPost"/>
             </h:form>
 
             <c:if test="${postController.getPost().getComments().size() == 0}">
@@ -54,7 +54,7 @@
             <c:if test="${postController.getPost().getComments().size() > 0}">
                 <h2><h:outputLabel value="${postController.getPost().getBlog().getTitle()}"/>'s comments </h2>
             </c:if>
-            <div id="commentsPost">
+            <ui:fragment id="commentsPost">
                 <c:forEach var="comment" items="${postController.getPost().getComments()}">
                     <c:if test="${comment.getIsDeleted() == false}">
                         <p:fieldset legend="#{comment.getUser().getFirstName().concat(' ').concat(comment.getUser().getName()).concat(' ').concat(comment.getDate().toString())}" toggleable="true" toggleSpeed="500">
@@ -77,7 +77,7 @@
                         <br></br>
                     </c:if>
                 </c:forEach>
-            </div>
+            </ui:fragment>
         </f:view>
     </ui:define>
 </ui:composition>

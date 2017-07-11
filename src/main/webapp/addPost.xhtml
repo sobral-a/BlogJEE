@@ -21,14 +21,14 @@
                 <p:panel header="Add post" style="width: 450px; margin: 0 auto;">
                     <h:panelGrid id="postPanel" columns="2">
                         <h:outputText value="Title" />
-                        <p:inputText id="title" value="#{postController.title}" label="Title"></p:inputText>
+                        <p:inputText id="title" value="#{blogController.title}" label="Title"></p:inputText>
                         <p:spacer></p:spacer>
                         <p:message for="title" ></p:message>
                         <h:outputText value="Content" />
-                        <p:inputTextarea rows="6" cols="33" id="content" value="#{postController.content}"  label="Content"></p:inputTextarea>
+                        <p:inputTextarea rows="6" cols="33" id="content" value="#{blogController.content}"  label="Content"></p:inputTextarea>
                         <p:spacer></p:spacer>
                         <p:message for="content" ></p:message>
-                        <p:commandButton action="#{postController.add(sessionScope['userId'])}" value="Add" update="growl"/>
+                        <p:commandButton action="#{blogController.addPost(sessionScope['userId'])}" value="Add" update="growl"/>
                     </h:panelGrid>
                 </p:panel>
             </h:form>
