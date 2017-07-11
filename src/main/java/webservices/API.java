@@ -22,7 +22,7 @@ public class API extends Application
     private Set<Class<?>> getRestResourceClasses()
     {
         Set<Class<?>> resources = new java.util.HashSet<Class<? >>();
-        resources.add(UserService.class);
+        resources.add(BlogService.class);
         return resources;
     }
 }
