@@ -20,6 +20,7 @@ public class BlogsController
     @Inject
     private BlogService blogService;
 
+    //List all blogs
     @Transactional
     public List<Blog> getBlogList()
     {
@@ -27,6 +28,7 @@ public class BlogsController
         return blogs;
     }
 
+    //Delete by id
     public void delete(Integer id)
     {
         blogService.delete(id);

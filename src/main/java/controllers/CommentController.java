@@ -37,6 +37,7 @@ public class CommentController implements Serializable
     @Inject
     private UserService userService;
 
+    //Delete by id
     @Transactional
     public void delete(Comment comment)
     {

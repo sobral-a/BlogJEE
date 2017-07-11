@@ -27,6 +27,7 @@ import java.io.Serializable;
 @Named("blogController")
 public class BlogController implements Serializable
 {
+    /*** GETTER SETTER ***/
     @Getter @Setter
     private String title;
     @Getter @Setter
@@ -34,6 +35,7 @@ public class BlogController implements Serializable
     @Getter @Setter
     private String content;
 
+    /*** SERVICE ***/
     @Inject
     private BlogService blogService;
     @Inject
@@ -43,6 +45,7 @@ public class BlogController implements Serializable
 
     private Blog blog;
 
+    //Set the blog
     public void setBlog(Blog blog)
     {
         this.blog = blog;
@@ -55,6 +58,7 @@ public class BlogController implements Serializable
         }
     }
 
+    //Add a blog in bdd
     @Transactional
     public void add(Integer id) throws IOException {
         if (theme.isEmpty() || title.isEmpty()) {
@@ -65,6 +69,7 @@ public class BlogController implements Serializable
         FacesContext.getCurrentInstance().getExternalContext().redirect("blogs.xhtml");
     }
 
+    //Add a post in bdd
     @Transactional
     public void addPost(Integer id) throws IOException {
         if (title.isEmpty() || content.isEmpty()) {
@@ -76,16 +81,19 @@ public class BlogController implements Serializable
         setBlog(newBlog);
     }
 
+    //Error message
     public void addMessage(String summary) {
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_FATAL, summary,  null);
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
 
+    //Get the blog
     public Blog getBlog()
     {
         return this.blog;
     }
 
+    //Delete a blog
     @Transactional
     public void delete(Blog blog) throws IOException
     {
@@ -95,10 +103,12 @@ public class BlogController implements Serializable
         FacesContext.getCurrentInstance().getExternalContext().redirect("blogs.xhtml");
     }
 
+    //Go to the add blog form
     public void addBlogForm() throws IOException {
         FacesContext.getCurrentInstance().getExternalContext().redirect("addBlog.xhtml");
     }
 
+    //Delete post
     @Transactional
     public void delete(Post argPost) throws IOException
     {

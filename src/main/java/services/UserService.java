@@ -21,6 +21,7 @@ public class UserService implements Serializable
     @Inject
     private UserAccess userAccess;
 
+    //Add user in bdd
     public void add(String name, String firstName, String email, String password, String role)
     {
         User user = new User();
@@ -33,6 +34,7 @@ public class UserService implements Serializable
         userAccess.add(user);
     }
 
+    //Delete user by id
     public void delete(Integer id)
     {
         User user = userAccess.getById(User.class, id);
@@ -40,6 +42,7 @@ public class UserService implements Serializable
         userAccess.update(id);
     }
 
+    //Update user
     public void update(Integer id, String name, String firstName, String email, String password, String role)
     {
         User user  = userAccess.getById(User.class, id);
@@ -51,16 +54,19 @@ public class UserService implements Serializable
         userAccess.update(user);
     }
 
+    //Get user by id
     public User getById(Integer id)
     {
         return userAccess.getById(User.class, id);
     }
 
+    //List all users
     public List<User> list()
     {
         return userAccess.list(new User());
     }
 
+    //Check connection
     public Boolean checkConnection(String email, String password) {
         return userAccess.checkConnection(email, password);
     }

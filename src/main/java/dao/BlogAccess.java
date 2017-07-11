@@ -21,6 +21,7 @@ public class BlogAccess extends GenericAccess
     @PersistenceContext(unitName = "context")
     private EntityManager em;
 
+    //Get all blogs
     public List<Blog> getList(Boolean isDeleted)
     {
         Query query = em.createQuery("Select blog from Blog blog where blog.isDeleted=:isDeleted");

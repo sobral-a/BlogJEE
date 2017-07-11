@@ -29,11 +29,13 @@ import java.util.Date;
 @Named("postController")
 public class PostController implements Serializable
 {
+    /*** GETTER SETTER ***/
     @Getter @Setter
     private String title;
     @Getter @Setter
     private String content;
 
+    /*** SERVICES ***/
     @Inject
     private PostService postService;
     @Inject
@@ -44,6 +46,7 @@ public class PostController implements Serializable
     private Post post;
     private Blog blog;
 
+    //Set post
     public void setPost(Post post)
     {
         this.post = post;
@@ -56,28 +59,33 @@ public class PostController implements Serializable
         }
     }
 
+    //Get post
     public Post getPost()
     {
         Post newPost = postService.getById(this.post.getId());
         return newPost;
     }
 
+    //Delete by id
     public void delete(Integer id)
     {
         postService.delete(id);
     }
 
+    //Go to the add post form
     public void addPostForm(Blog blog) throws IOException {
         this.blog = blog;
         FacesContext.getCurrentInstance().getExternalContext().redirect("addPost.xhtml");
     }
 
+    //Delete post by id
     @Transactional
     public void delete(Post argPost)
     {
         postService.delete(argPost.getId());
     }
 
+    //Add comment in bdd
     @Transactional
     public void addComment(Integer id, Post post) throws IOException {
         this.post = post;
@@ -90,6 +98,7 @@ public class PostController implements Serializable
         setPost(newPost);
     }
 
+    //Error message
     public void addMessage(String summary) {
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_FATAL, summary,  null);
         FacesContext.getCurrentInstance().addMessage(null, message);

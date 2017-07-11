@@ -21,6 +21,7 @@ public class BlogService implements Serializable
     @Inject
     private BlogAccess blogAccess;
 
+    //Add blog in bdd
     public void add(User user, String theme, String title, Date date)
     {
         Blog blog = new Blog();
@@ -32,6 +33,7 @@ public class BlogService implements Serializable
         blogAccess.add(blog);
     }
 
+    //Delete blog by id
     public void delete(Integer id)
     {
         Blog blog = blogAccess.getById(Blog.class, id);
@@ -39,6 +41,7 @@ public class BlogService implements Serializable
         blogAccess.update(blog);
     }
 
+    //Update a blog
     public void update(Integer id, User user, String theme, String title)
     {
         Blog blog  = blogAccess.getById(Blog.class, id);
@@ -49,11 +52,13 @@ public class BlogService implements Serializable
         blogAccess.update(blog);
     }
 
+    //Get blog by id
     public Blog getById(Integer id)
     {
         return blogAccess.getById(Blog.class, id);
     }
 
+    //Get all blogs
     public List<Blog> list()
     {
         return blogAccess.getList(false);

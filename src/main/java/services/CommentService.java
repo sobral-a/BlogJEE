@@ -24,6 +24,7 @@ public class CommentService implements Serializable
     @Inject
     private CommentAccess commentAccess;
 
+    //Add comment in bdd
     public void add(User user, Post post, String content, Date date)
     {
         Comment comment = new Comment();
@@ -33,8 +34,9 @@ public class CommentService implements Serializable
         comment.setDate(date);
         comment.setIsDeleted(false);
         commentAccess.add(comment);
-}
+    }
 
+    //Delete comment by id
     public void delete(Integer id)
     {
         Comment comment  = commentAccess.getById(Comment.class, id);
@@ -42,6 +44,7 @@ public class CommentService implements Serializable
         commentAccess.update(comment);
     }
 
+    //Update comment by id
     public void update(Integer id, User user, Post post, String content, Date date)
     {
         Comment comment = commentAccess.getById(Comment.class, id);
@@ -52,11 +55,13 @@ public class CommentService implements Serializable
         commentAccess.update(comment);
     }
 
+    //Get comment by id
     public Comment getById(Integer id)
     {
         return commentAccess.getById(Comment.class, id);
     }
 
+    //Get all comment
     public List<Comment> list()
     {
         return commentAccess.list(new Comment());

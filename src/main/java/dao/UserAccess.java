@@ -19,6 +19,7 @@ public class UserAccess extends GenericAccess {
     @PersistenceContext(unitName = "context")
     private EntityManager em;
 
+    //Check the connection and create session
     public Boolean checkConnection(String email, String password)
     {
         Query query = em.createQuery("Select user from User user where user.email=:email");

@@ -24,6 +24,7 @@ public class PostService implements Serializable
     @Inject
     private PostAccess postAccess;
 
+    //Add post in bdd
     public void add(Blog blog, User user, String title, String content, Date date)
     {
         Post post = new Post();
@@ -34,8 +35,9 @@ public class PostService implements Serializable
         post.setCreationDate(date);
         post.setIsDeleted(false);
         postAccess.add(post);
-}
+    }
 
+    //Delete post by id
     public void delete(Integer id)
     {
         Post post  = postAccess.getById(Post.class, id);
@@ -43,6 +45,7 @@ public class PostService implements Serializable
         postAccess.update(post);
     }
 
+    //Update post
     public void update(Integer id, Blog blog, User user, String title, String content)
     {
         Post post = postAccess.getById(Post.class, id);
@@ -53,12 +56,13 @@ public class PostService implements Serializable
         postAccess.update(post);
     }
 
-
+    //Get post by id
     public Post getById(Integer id)
     {
         return postAccess.getById(Post.class, id);
     }
 
+    //List all posts
     public List<Post> list()
     {
         return postAccess.list(new Post());

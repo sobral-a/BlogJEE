@@ -26,6 +26,7 @@ import java.util.List;
 @Named("userController")
 public class UserController implements Serializable
 {
+    /*** GETTER SETTER ***/
     @Getter @Setter
     private String email;
     @Getter @Setter
@@ -35,22 +36,26 @@ public class UserController implements Serializable
     @Getter @Setter
     private String password;
 
+    /*** SERVICE ***/
     @Inject
     private UserService userService;
 
 
+    //Get all users
     public List<User> getUserList()
     {
         List<User> users = userService.list();
         return users;
     }
 
+    //Get user by id
     public User getUser(Integer id)
     {
         User user = userService.getById(id);
         return user;
     }
 
+    //Add user in bdd
     @Transactional
     public void addUser(String role) {
         if (name.isEmpty() || firstName.isEmpty() || email.isEmpty() || password.isEmpty()) {
@@ -66,6 +71,7 @@ public class UserController implements Serializable
         }
     }
 
+    //Connect the user
     public void connect() {
         if (email.isEmpty() || password.isEmpty()) {
             addMessage("Fill all the fields!");
@@ -83,30 +89,36 @@ public class UserController implements Serializable
         }
     }
 
+    //Error message
     public void addMessage(String summary) {
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_FATAL, summary,  null);
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
 
+    //Delete by id
     @Transactional
     public void delete(Integer id)
     {
         userService.delete(id);
     }
 
+    //Go to the connection page
     public void connection() throws IOException {
         FacesContext.getCurrentInstance().getExternalContext().redirect("connection.xhtml");
     }
 
+    //Go to the register page
     public void register() throws IOException {
         FacesContext.getCurrentInstance().getExternalContext().redirect("register.xhtml");
     }
 
+    //Logout
     public void logout() throws IOException {
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         FacesContext.getCurrentInstance().getExternalContext().redirect("connection.xhtml");
     }
 
+    //Go to blog page
     public void blog() throws IOException {
         FacesContext.getCurrentInstance().getExternalContext().redirect("blogs.xhtml");
     }
