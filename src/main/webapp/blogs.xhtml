@@ -37,10 +37,11 @@
                         <h:outputText value="Posts:" />
                         <h:outputText value="#{blog.getPosts().size()}" style="font-weight: bold"/>
                         <p:commandButton value="Visit the blog" id="withIcon" actionListener="#{blogController.setBlog(blog)}" icon="ui-icon-document" />
-                        <c:if test="#{(sessionScope['userId'] eq blog.getUser().getId()) or (sessionScope['userRole'] eq 'admin')}" >
-                            <p:commandButton value="Delete blog" icon="ui-icon-close" actionListener="#{blogController.setBlog(blog)}" update="blogsList"/>
+                        <c:if test="#{(Integer.parseInt(sessionScope['userId']) == blog.getUser().getId()) or (sessionScope['userRole'] == 'admin')}" >
+                            <h:form>
+                                <p:commandButton value="Delete blog" icon="ui-icon-close" actionListener="#{blogController.delete(blog)}" />
+                            </h:form>
                         </c:if>
-
 
                     </h:panelGrid>
                 </p:outputPanel>

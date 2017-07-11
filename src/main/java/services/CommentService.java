@@ -1,5 +1,6 @@
 package services;
 
+import dao.CommentAccess;
 import dao.GenericAccess;
 import models.Blog;
 import models.Comment;
@@ -21,7 +22,7 @@ import java.util.List;
 public class CommentService implements Serializable
 {
     @Inject
-    private GenericAccess commentAccess;
+    private CommentAccess commentAccess;
 
     public void add(User user, Post post, String content, Date date)
     {

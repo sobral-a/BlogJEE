@@ -13,6 +13,7 @@ import java.io.Serializable;
 /**
  * Created by khalis on 10/07/2017.
  */
+
 @SessionScoped
 public class UserAccess extends GenericAccess {
     @PersistenceContext(unitName = "context")
@@ -28,5 +29,11 @@ public class UserAccess extends GenericAccess {
             return true;
         }
         return false;
+    }
+
+    @Override
+    protected EntityManager getEm()
+    {
+        return em;
     }
 }

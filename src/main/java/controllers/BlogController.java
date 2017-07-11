@@ -69,9 +69,10 @@ public class BlogController implements Serializable
         return this.blog;
     }
 
-    public void delete(Integer id)
+    @Transactional
+    public void delete(Blog blog)
     {
-        blogService.delete(id);
+        blogService.delete(blog.getId());
     }
 
     public void addBlogForm() throws IOException {

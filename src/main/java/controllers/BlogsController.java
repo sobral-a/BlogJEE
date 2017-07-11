@@ -24,6 +24,7 @@ public class BlogsController
     public List<Blog> getBlogList()
     {
         List<Blog> blogs = blogService.list();
+
         return blogs;
     }
 

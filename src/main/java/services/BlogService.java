@@ -1,10 +1,10 @@
 package services;
 
+import dao.BlogAccess;
 import dao.GenericAccess;
 import models.Blog;
 import models.User;
 
-import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import java.io.Serializable;
@@ -19,7 +19,7 @@ import java.util.List;
 public class BlogService implements Serializable
 {
     @Inject
-    private GenericAccess blogAccess;
+    private BlogAccess blogAccess;
 
     public void add(User user, String theme, String title, Date date)
     {
@@ -36,7 +36,7 @@ public class BlogService implements Serializable
     {
         Blog blog = blogAccess.getById(Blog.class, id);
         blog.setIsDeleted(true);
-        blogAccess.update(id);
+        blogAccess.update(blog);
     }
 
     public void update(Integer id, User user, String theme, String title)
@@ -56,6 +56,6 @@ public class BlogService implements Serializable
 
     public List<Blog> list()
     {
-        return blogAccess.list(new Blog());
+        return blogAccess.getList(false);
     }
 }

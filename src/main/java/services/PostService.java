@@ -2,6 +2,7 @@ package services;
 
 import com.sun.scenario.effect.impl.prism.ps.PPSOneSamplerPeer;
 import dao.GenericAccess;
+import dao.PostAccess;
 import models.*;
 import models.Post;
 
@@ -21,7 +22,7 @@ import java.util.List;
 public class PostService implements Serializable
 {
     @Inject
-    private GenericAccess postAccess;
+    private PostAccess postAccess;
 
     public void add(Blog blog, User user, String title, String content, Date date)
     {
