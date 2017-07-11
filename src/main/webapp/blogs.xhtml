@@ -18,7 +18,7 @@
         <f:view>
             <h1>Blogs</h1>
             <h:form>
-                <p:commandButton value="Add blog" actionListener="#{blogController.addBlogForm()}" icon="ui-icon-plusthick" />
+                <p:commandButton rendered="#{sessionScope['userRole'] == 'admin' or sessionScope['userRole'] == 'user'}" value="Add blog" actionListener="#{blogController.addBlogForm()}" icon="ui-icon-plusthick" />
             </h:form>
             <br></br>
             <h:form>

@@ -21,7 +21,7 @@
                 <p:link value="Back to the blogs" id="withIcon" href="blogs.xhtml" icon="ui-icon-caret-1-w" />
             </h:form>
             <h:form>
-                <p:commandButton value="Add post" actionListener="#{postController.addPostForm(blogController.getBlog())}" icon="ui-icon-plusthick" />
+                <p:commandButton rendered="#{sessionScope['userRole'] == 'admin' or sessionScope['userId'] == blogController.getBlog().user.id}" value="Add post" actionListener="#{postController.addPostForm(blogController.getBlog())}" icon="ui-icon-plusthick" />
             </h:form>
             <br></br>
             <br></br>
