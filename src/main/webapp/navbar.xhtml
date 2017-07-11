@@ -15,9 +15,15 @@
                 <h:form>
                     <p:growl id="messages"/>
                     <p:menubar>
-                        <p:menuitem value="Blogs" url=""/>
+                        <p:menuitem value="Blogs" actionListener="#{userController.blog()}"/>
                         <f:facet name="options">
-                            <p:commandButton type="button" value="Logout" icon="ui-icon-extlink" />
+                            <p:splitButton rendered="#{sessionScope['userId'] == null or sessionScope['userRole'] == 'visitor'}" value="Account" update="messages">
+                                <p:menuitem value="Connection" actionListener="#{userController.connection()}"/>
+                                <p:menuitem value="Register" actionListener="#{userController.register()}"/>
+                            </p:splitButton>
+                            <p:splitButton rendered="#{sessionScope['userId'] != null or sessionScope['userRole'] == 'admin' or sessionScope['userRole'] == 'user'}"  value="Account" update="messages">
+                                <p:menuitem value="Logout" actionListener="#{userController.logout()}"/>
+                            </p:splitButton>
                         </f:facet>
                     </p:menubar>
                 </h:form>

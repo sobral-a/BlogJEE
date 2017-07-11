@@ -93,4 +93,21 @@ public class UserController implements Serializable
     {
         userService.delete(id);
     }
+
+    public void connection() throws IOException {
+        FacesContext.getCurrentInstance().getExternalContext().redirect("connection.xhtml");
+    }
+
+    public void register() throws IOException {
+        FacesContext.getCurrentInstance().getExternalContext().redirect("register.xhtml");
+    }
+
+    public void logout() throws IOException {
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+        FacesContext.getCurrentInstance().getExternalContext().redirect("connection.xhtml");
+    }
+
+    public void blog() throws IOException {
+        FacesContext.getCurrentInstance().getExternalContext().redirect("blogs.xhtml");
+    }
 }
