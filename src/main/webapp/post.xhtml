@@ -35,6 +35,10 @@
             </p:outputPanel>
         </h:panelGrid>
     </p:fieldset>
+    <h3>Comment</h3>
+    <h:form>
+        <p:inputTextarea rows="1" cols="50" />
+    </h:form>
 
     <c:if test="${postController.getPost().getComments().size() == 0}">
         <h2>The blog hasn't comments yet</h2>

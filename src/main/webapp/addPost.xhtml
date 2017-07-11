@@ -20,7 +20,7 @@
                 <p:spacer></p:spacer>
                 <p:message for="title" ></p:message>
                 <h:outputText value="Content" />
-                <p:inputText id="content" value="#{postController.content}"  label="Content"></p:inputText>
+                <p:inputTextarea rows="6" cols="33" id="content" value="#{postController.content}"  label="Content"></p:inputTextarea>
                 <p:spacer></p:spacer>
                 <p:message for="content" ></p:message>
                 <p:commandButton action="#{postController.add(sessionScope['userId'])}" value="Add" update="growl"/>
