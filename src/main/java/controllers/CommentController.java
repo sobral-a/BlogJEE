@@ -1,5 +1,6 @@
 package controllers;
 
+import interceptor.Transaction;
 import lombok.Getter;
 import lombok.Setter;
 import models.Blog;
@@ -38,9 +39,10 @@ public class CommentController implements Serializable
     
     private Post post;
 
-    public void delete(Integer id)
+    @Transactional
+    public void delete(Comment comment)
     {
-        commentService.delete(id);
+        commentService.delete(comment.getId());
     }
 
     @Transactional

@@ -83,4 +83,10 @@ public class PostController implements Serializable
         this.blog = blog;
         FacesContext.getCurrentInstance().getExternalContext().redirect("addPost.xhtml");
     }
+
+    @Transactional
+    public void delete(Post argPost)
+    {
+        postService.delete(argPost.getId());
+    }
 }

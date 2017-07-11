@@ -35,10 +35,9 @@
                     <h:outputText value="Author:" />
                     <h:outputText value="${blogController.getBlog().getUser().getFirstName().concat(' ').concat(blogController.getBlog().getUser().getName())}" style="font-weight: bold"/>
 
-                    <h:outputText value="Posts:" />
-                    <h:outputText value="${blogController.getBlog().getPosts().size()}" style="font-weight: bold"/>
                 </h:panelGrid>
             </p:outputPanel>
+
         </h:panelGrid>
     </p:fieldset>
 
@@ -50,26 +49,29 @@
         <h2><h:outputLabel value="${blogController.getBlog().getTitle()}"/>'s posts </h2>
     </c:if>
     <c:forEach var="post" items="${blogController.getBlog().getPosts()}">
-        <p:fieldset legend="#{post.getTitle()}" toggleable="true" toggleSpeed="500">
+        <c:if test="${post.getIsDeleted() == false}">
+            <p:fieldset legend="#{post.getTitle()}" toggleable="true" toggleSpeed="500">
 
-            <h:panelGrid columns="2" cellpadding="10">
-                <h:outputText value="${post.getContent()}" />
-            </h:panelGrid>
-            <h:form>
-                <p:commandButton value="Visit this post" id="withIcon" actionListener="#{postController.setPost(post)}" icon="ui-icon-document" />
-            </h:form>
+                <h:panelGrid columns="2" cellpadding="10">
+                    <h:outputText value="${post.getContent()}" />
+                </h:panelGrid>
+                <h:form>
+                    <p:commandButton value="Visit this post" id="withIcon" actionListener="#{postController.setPost(post)}" icon="ui-icon-document" />
+                    <p:commandButton rendered="#{(sessionScope['userId'] == blogController.getBlog().getUser().getId()) or (sessionScope['userRole'] == 'admin')}" value="Delete post" icon="ui-icon-close" actionListener="#{postController.delete(post)}"/>
+                </h:form>
 
-            <f:facet name="options">
-                <p:menu>
-                    <p:submenu label="Settings">
-                        <p:menuitem value="Toggle" url="#" icon="ui-icon-newwin" onclick="PF('panel').toggle()" />
-                        <p:menuitem value="Remove" url="#" icon="ui-icon-close" onclick="PF('panel').close()" />
-                    </p:submenu>
-                </p:menu>
-            </f:facet>
-        </p:fieldset>
-        <br></br>
-        <br></br>
+                <f:facet name="options">
+                    <p:menu>
+                        <p:submenu label="Settings">
+                            <p:menuitem value="Toggle" url="#" icon="ui-icon-newwin" onclick="PF('panel').toggle()" />
+                            <p:menuitem value="Remove" url="#" icon="ui-icon-close" onclick="PF('panel').close()" />
+                        </p:submenu>
+                    </p:menu>
+                </f:facet>
+            </p:fieldset>
+            <br></br>
+            <br></br>
+        </c:if>
     </c:forEach>
 
 </f:view>
