@@ -61,7 +61,7 @@
                             <h:panelGrid columns="100" cellpadding="10">
                                 <h:outputText value="${comment.getContent()}" />
                                 <h:form>
-                                    <p:commandButton rendered="#{(sessionScope['userId'] == comment.getUser().getId()) or (sessionScope['userRole'] == 'admin')}" value="Delete comment" icon="ui-icon-close" actionListener="#{commentController.delete(comment)}"/>
+                                    <p:commandButton rendered="#{(sessionScope['userId'] == comment.getUser().getId()) or (sessionScope['userRole'] == 'admin')}" value="Delete comment" icon="ui-icon-close" actionListener="#{postController.delete(comment)}"/>
                                 </h:form>
                             </h:panelGrid>
 

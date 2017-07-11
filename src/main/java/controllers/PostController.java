@@ -3,6 +3,7 @@ package controllers;
 import lombok.Getter;
 import lombok.Setter;
 import models.Blog;
+import models.Comment;
 import models.Post;
 import services.BlogService;
 import services.CommentService;
@@ -92,5 +93,14 @@ public class PostController implements Serializable
     public void addMessage(String summary) {
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_FATAL, summary,  null);
         FacesContext.getCurrentInstance().addMessage(null, message);
+    }
+
+    @Transactional
+    public void delete(Comment comment) throws IOException
+    {
+        commentService.delete(comment.getId());
+        Post newPost = postService.getById(comment.getPost().getId());
+        this.post = newPost;
+        FacesContext.getCurrentInstance().getExternalContext().redirect("post.xhtml");
     }
 }
