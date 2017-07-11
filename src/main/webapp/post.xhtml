@@ -37,7 +37,9 @@
     </p:fieldset>
     <h3>Comment</h3>
     <h:form>
-        <p:inputTextarea rows="1" cols="50" />
+        <p:inputTextarea rows="1" cols="50" id="comment" value="#{commentController.content}" label="Comment"></p:inputTextarea>
+        <br></br>
+        <p:commandButton action="#{commentController.add(sessionScope['userId'], postController.getPost())}" value="Comment"/>
     </h:form>
 
     <c:if test="${postController.getPost().getComments().size() == 0}">
@@ -48,7 +50,7 @@
         <h2><h:outputLabel value="${postController.getPost().getBlog().getTitle()}"/>'s comments </h2>
     </c:if>
     <c:forEach var="comment" items="${postController.getPost().getComments()}">
-        <p:fieldset legend="#{comment.getUser().getFirstName().concat(' ').concat(comment.getUser().getName()).concat(' ').concat(comment.getCreationDate().toString())}" toggleable="true" toggleSpeed="500">
+        <p:fieldset id="comments" legend="#{comment.getUser().getFirstName().concat(' ').concat(comment.getUser().getName()).concat(' ').concat(comment.getDate().toString())}" toggleable="true" toggleSpeed="500">
 
             <h:panelGrid columns="100" cellpadding="10">
                 <h:outputText value="${comment.getContent()}" />
@@ -63,6 +65,7 @@
                 </p:menu>
             </f:facet>
         </p:fieldset>
+        <br></br>
     </c:forEach>
 
 </f:view>
