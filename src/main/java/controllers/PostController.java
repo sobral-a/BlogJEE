@@ -5,6 +5,7 @@ import lombok.Setter;
 import models.Blog;
 import models.Post;
 import services.BlogService;
+import services.CommentService;
 import services.PostService;
 import services.UserService;
 
@@ -37,7 +38,7 @@ public class PostController implements Serializable
     @Inject
     private UserService userService;
     @Inject
-    private BlogService blogService;
+    private CommentService commentService;
 
     private Post post;
     private Blog blog;
@@ -74,5 +75,22 @@ public class PostController implements Serializable
     public void delete(Post argPost)
     {
         postService.delete(argPost.getId());
+    }
+
+    @Transactional
+    public void addComment(Integer id, Post post) throws IOException {
+        this.post = post;
+        if (content.isEmpty()) {
+            addMessage("Write a comment !");
+            return;
+        }
+        commentService.add(userService.getById(id), post, content, new Date());
+        Post newPost = postService.getById(post.getId());
+        setPost(newPost);
+    }
+
+    public void addMessage(String summary) {
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_FATAL, summary,  null);
+        FacesContext.getCurrentInstance().addMessage(null, message);
     }
 }

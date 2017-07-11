@@ -37,26 +37,9 @@ public class CommentController implements Serializable
     @Inject
     private UserService userService;
 
-    private Post post;
-
     @Transactional
     public void delete(Comment comment)
     {
         commentService.delete(comment.getId());
-    }
-
-    @Transactional
-    public void add(Integer id, Post post) throws IOException {
-        this.post = post;
-        if (content.isEmpty()) {
-            addMessage("Write a comment !");
-            return;
-        }
-        commentService.add(userService.getById(id), post, content, new Date());
-    }
-
-    public void addMessage(String summary) {
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_FATAL, summary,  null);
-        FacesContext.getCurrentInstance().addMessage(null, message);
     }
 }
