@@ -19,7 +19,8 @@ public class UserAccess extends GenericAccess {
     @PersistenceContext(unitName = "context")
     private EntityManager em;
 
-    public Boolean checkConnection(String email, String password) {
+    public Boolean checkConnection(String email, String password)
+    {
         Query query = em.createQuery("Select user from User user where user.email=:email");
         Object user = query.setParameter("email", email).getSingleResult();
         if (((User) user).getPassword().equals(password)) {

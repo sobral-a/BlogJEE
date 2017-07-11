@@ -15,7 +15,7 @@
     <h1>Blogs</h1>
     <p:commandButton value="Add blog" actionListener="#{blogController.addBlogForm()}" icon="ui-icon-plusthick" />
     <h:form>
-        <p:dataScroller id="blogsList" value="#{blogsController.getBlogList()}" var="blog" chunkSize="10">
+        <p:dataScroller id="dataScroller" value="#{blogsController.getBlogList()}" var="blog" chunkSize="10">
             <f:facet name="header">
                 All the blogs
             </f:facet>
@@ -39,7 +39,8 @@
                         <p:commandButton value="Visit the blog" id="withIcon" actionListener="#{blogController.setBlog(blog)}" icon="ui-icon-document" />
                         <c:if test="#{(Integer.parseInt(sessionScope['userId']) == blog.getUser().getId()) or (sessionScope['userRole'] == 'admin')}" >
                             <h:form>
-                                <p:commandButton value="Delete blog" icon="ui-icon-close" actionListener="#{blogController.delete(blog)}" />
+                                <p:growl id="growl" showDetail="true" life="2000"/>
+                                <p:commandButton value="Delete blog" icon="ui-icon-close" actionListener="#{blogController.delete(blog)}" update="growl"/>
                             </h:form>
                         </c:if>
 
