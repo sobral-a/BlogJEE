@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
+import dao.BlogAccess;
 import models.Blog;
 import models.Post;
 import models.User;
@@ -32,11 +33,11 @@ public class BlogService
     {
         ArrayList<Blog> blogs = (ArrayList<Blog>) blogService.list();
         ArrayList<String> titles = new ArrayList<>();
-        for (Blog b : blogs)
-        {
-            titles.add(b.getTitle());
-        }
         ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
+        for (Blog t : blogs)
+        {
+            titles.add(t.getTitle());
+        }
         try
         {
             return ow.writeValueAsString(titles);
