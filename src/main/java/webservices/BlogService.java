@@ -31,10 +31,15 @@ public class BlogService
     public String getBlogs()
     {
         ArrayList<Blog> blogs = (ArrayList<Blog>) blogService.list();
+        ArrayList<String> titles = new ArrayList<>();
+        for (Blog b : blogs)
+        {
+            titles.add(b.getTitle());
+        }
         ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
         try
         {
-            return ow.writeValueAsString(blogs);
+            return ow.writeValueAsString(titles);
         }
         catch (JsonProcessingException e)
         {
@@ -50,10 +55,15 @@ public class BlogService
     public String getPosts(@PathParam("id") final Integer id)
     {
         List<Post> posts = blogService.getById(id).getPosts();
+        ArrayList<String> titles = new ArrayList<>();
+        for (Post t : posts)
+        {
+            titles.add(t.getTitle());
+        }
         ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
         try
         {
-            return ow.writeValueAsString(posts);
+            return ow.writeValueAsString(titles);
         }
         catch (JsonProcessingException e)
         {
