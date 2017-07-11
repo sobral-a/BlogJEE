@@ -40,11 +40,11 @@
                     </p:outputPanel>
                 </h:panelGrid>
             </p:fieldset>
-            <h3>Comment</h3>
-            <h:form>
+            <h:form rendered="#{sessionScope['userId'] != null}">
+                <h3>Comment</h3>
                 <p:inputTextarea rows="1" cols="50" id="comment" value="#{commentController.content}" label="Comment"></p:inputTextarea>
                 <br></br>
-                <p:commandButton action="#{commentController.add(sessionScope['userId'], postController.getPost())}" value="Comment" update="commentsPost"/>
+                <p:commandButton action="#{commentController.add(sessionScope['userId'], postController.getPost())}" value="Comment" update=""/>
             </h:form>
 
             <c:if test="${postController.getPost().getComments().size() == 0}">
@@ -54,28 +54,30 @@
             <c:if test="${postController.getPost().getComments().size() > 0}">
                 <h2><h:outputLabel value="${postController.getPost().getBlog().getTitle()}"/>'s comments </h2>
             </c:if>
-            <c:forEach id="commentsPost" var="comment" items="${postController.getPost().getComments()}">
-                <c:if test="${comment.getIsDeleted() == false}">
-                    <p:fieldset id="comments" legend="#{comment.getUser().getFirstName().concat(' ').concat(comment.getUser().getName()).concat(' ').concat(comment.getDate().toString())}" toggleable="true" toggleSpeed="500">
-                        <h:panelGrid columns="100" cellpadding="10">
-                            <h:outputText value="${comment.getContent()}" />
-                            <h:form>
-                                <p:commandButton rendered="#{(sessionScope['userId'] == comment.getUser().getId()) or (sessionScope['userRole'] == 'admin')}" value="Delete comment" icon="ui-icon-close" actionListener="#{commentController.delete(comment)}"/>
-                            </h:form>
-                        </h:panelGrid>
+            <div id="commentsPost">
+                <c:forEach var="comment" items="${postController.getPost().getComments()}">
+                    <c:if test="${comment.getIsDeleted() == false}">
+                        <p:fieldset legend="#{comment.getUser().getFirstName().concat(' ').concat(comment.getUser().getName()).concat(' ').concat(comment.getDate().toString())}" toggleable="true" toggleSpeed="500">
+                            <h:panelGrid columns="100" cellpadding="10">
+                                <h:outputText value="${comment.getContent()}" />
+                                <h:form>
+                                    <p:commandButton rendered="#{(sessionScope['userId'] == comment.getUser().getId()) or (sessionScope['userRole'] == 'admin')}" value="Delete comment" icon="ui-icon-close" actionListener="#{commentController.delete(comment)}"/>
+                                </h:form>
+                            </h:panelGrid>
 
-                        <f:facet name="options">
-                            <p:menu>
-                                <p:submenu label="Settings">
-                                    <p:menuitem value="Toggle" url="#" icon="ui-icon-newwin" onclick="PF('panel').toggle()" />
-                                    <p:menuitem value="Remove" url="#" icon="ui-icon-close" onclick="PF('panel').close()" />
-                                </p:submenu>
-                            </p:menu>
-                        </f:facet>
-                    </p:fieldset>
-                    <br></br>
-                </c:if>
-            </c:forEach>
+                            <f:facet name="options">
+                                <p:menu>
+                                    <p:submenu label="Settings">
+                                        <p:menuitem value="Toggle" url="#" icon="ui-icon-newwin" onclick="PF('panel').toggle()" />
+                                        <p:menuitem value="Remove" url="#" icon="ui-icon-close" onclick="PF('panel').close()" />
+                                    </p:submenu>
+                                </p:menu>
+                            </f:facet>
+                        </p:fieldset>
+                        <br></br>
+                    </c:if>
+                </c:forEach>
+            </div>
         </f:view>
     </ui:define>
 </ui:composition>
