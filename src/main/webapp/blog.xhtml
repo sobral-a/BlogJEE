@@ -60,7 +60,7 @@
                         </h:panelGrid>
                         <h:form>
                             <p:commandButton value="Visit this post" id="withIcon" actionListener="#{postController.setPost(post)}" icon="ui-icon-document" />
-                            <p:commandButton rendered="#{(sessionScope['userId'] == blogController.getBlog().getUser().getId()) or (sessionScope['userRole'] == 'admin')}" value="Delete post" icon="ui-icon-close" actionListener="#{postController.delete(post)}"/>
+                            <p:commandButton rendered="#{(sessionScope['userId'] == blogController.getBlog().getUser().getId()) or (sessionScope['userRole'] == 'admin')}" value="Delete post" icon="ui-icon-close" actionListener="#{blogController.delete(post)}"/>
                         </h:form>
                         <f:facet name="options">
                             <p:menu>

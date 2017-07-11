@@ -87,12 +87,26 @@ public class BlogController implements Serializable
     }
 
     @Transactional
-    public void delete(Blog blog)
+    public void delete(Blog blog) throws IOException
     {
         blogService.delete(blog.getId());
+        Blog newBlog = blogService.getById(this.blog.getId());
+        this.blog = newBlog;
+        FacesContext.getCurrentInstance().getExternalContext().redirect("blogs.xhtml");
     }
 
     public void addBlogForm() throws IOException {
         FacesContext.getCurrentInstance().getExternalContext().redirect("addBlog.xhtml");
     }
+
+    @Transactional
+    public void delete(Post argPost) throws IOException
+    {
+        postService.delete(argPost.getId());
+        Blog newBlog = blogService.getById(argPost.getBlog().getId());
+        postService.delete(argPost.getId());
+        this.blog = newBlog;
+        FacesContext.getCurrentInstance().getExternalContext().redirect("blog.xhtml");
+    }
+
 }

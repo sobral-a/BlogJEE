@@ -57,7 +57,7 @@ public class PostController implements Serializable
 
     public Post getPost()
     {
-        Post newPost= postService.getById(this.post.getId());
+        Post newPost = postService.getById(this.post.getId());
         return newPost;
     }
 
